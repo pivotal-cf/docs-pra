@@ -1,0 +1,98 @@
+---
+title: Routing
+owner: Customer[0]
+---
+
+<strong><%= modified_date %></strong>
+
+## <a id='nsxt_lb'></a>NSX-T Data Center Edge Type and Load Balancer capacity planning
+
+|Edge Node|LB Small|LB Small|LB Medium|LB Medium|LB Large|LB Large|
+|---------|--------|--------|---------|---------|--------|--------|
+|**NSX-T Data Center release**|**2.2**|**2.3**|**2.2**|**2.3**|**2.2**|**2.3**|
+|Edge VM - Small|-|-|-|-|-|-|
+|Edge VM - Medium|1|1|-|-|-|-|
+|Edge VM - Large|40|40|1|4|-|-|
+|Edge Bare Metal|750|750|75|75|1|7|
+
+It is recommended to go with a minimum of 4 Large Edge VMs (2 instances is very minimal and necessary for HA) to have a sufficient number of available Load Balancer instances. A production grade deployment should use medium load balancers. Even though there might be 40 small sized load balancers available on a large Edge VM, only the 4 medium sized load balancers are recommended for a production environment.
+
+The size of the Load Balancer determines the number of Virtual Servers, Pools, and Pool Members per LB instance.
+
+**Note**: Large LB is only available in Bare Metal Edge.
+
+|LB Service|Small|Small|Medium|Medium|Large|Large|
+|---------|--------|--------|---------|---------|--------|--------|
+|**NSX-T Data Center release**|**2.2**|**2.3**|**2.2**|**2.3**|**2.2**|**2.3**|
+|# of Virtual Servers per LB|10|10|100|100|1000|1000|
+|# of Pools per LB|10|20|100|200|1000|2000|
+|# of Pool Memebers per LB|30|200|300|2000|3000|10000|
+
+**Important Note**: Since PAS and Enterprise PKS use active/standby Edge Node LB Service, one would always need to consider capacity as per Edge pair to derive the available number of Load Balancer Services. If there are 2 Edge servers, only the load balancer service capacity of one instance can be taken into consideration as the other is treated as stand-by.
+
+The following table shows the capacity for 2 instances of large Edge VM as 4 for medium sized load balancers even though each Edge instance itself does have 4 load balance instance capacity.
+
+|Edge Cluster|LB Small|LB Small|LB Medium|LB Medium|LB Large|LB Large|
+|---------|--------|--------|---------|---------|--------|--------|
+|**NSX-T Data Center release**|**2.2**|**2.3**|**2.2**|**2.3**|**2.2**|**2.3**|
+|2x Edge VM - Large|40|40|1|4|-|-|
+|4x Edge VM - Large|80|80|2|8|-|-|
+|8x Edge VM - Large|160|160|4|16|-|-|
+|2x Edge Bare Metal|750|750|75|75|1|7|
+|4x Edge Bare Metal|1500|1500|150|150|2|14|
+|8x Edge Bare Metal|3000|3000|300|300|4|28|
+
+The number of available Load Balancer instances tied to the Edge instances is directly proportional (1:1) to the maximum number of Kubernetes clusters that can be supported. Each Kubernetes cluster would use minimum of one load balancer from an active Edge instance. Based on the type of load balancer and the Edge, the load balancer instances are fixed. As such, the resulting number of Kubernetes clusters created on the edge are also constrained by the number of free loadbalancer services on the active Edge.
+
+**Note**: Maximum number of Edge nodes per Edge Cluster is 10 (as of NSX-T Data Center 2.3). If the number of Edge nodes is greater than 10, create additional Edge clusters. If the Load Balancer service capacity is fully utilized on a given Edge pair (one active, other standby), then install and bring up additional Edge VM instance pairs in the same Edge Cluster to handle requirements for additional load balancers (for existing or new Enterprise PKS clusters).
+
+## <a id='pks routing'></a>Ingress Routing and Load Balancing for Enterprise PKS
+
+How you select ingress routing influences load balancing choices. You’re going to want both ingress routing and load balancing.
+
+* Ingress Routing - Layer 7
+* Service Type:LoadBalancer - Layer 4
+
+Ingress             |  Load Balancer
+:-------------------------:|:-------------------------:
+![ingress](./images/ingress.png)  | ![loadbalancer](./images/loadbalancer.png)
+
+### <a id='ingress routing'></a>Ingress Routing Layer 7
+
+NSX-T Data Center native ingress router is included when deploying with NSX-T Data Center. Third party options include Istio or Nginx running as containers in the cluster. Wildcard DNS entries are needed to point at the ingress service in the style of go-routers in PAS. Domain info for ingress is defined in the manifest of the Kubernetes deployment. Here is an example.
+
+```
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: music-ingress
+  namespace: music1
+spec:
+  rules:
+  - host: music1.Enterprise PKS.domain.com
+    http:
+      paths:
+      - path: /.*
+        backend:
+          serviceName: music-service
+          servicePort: 8080
+```
+
+### <a id='load balancer routing'></a>Service Type:Load Balancer - Layer 4
+
+When pushing a Kubernetes deployment with type set to `LoadBalancer`, NSX-T Data Center automatically creates a new VIP for the deployment on the existing load balancer for that namespace. You will need to specify a listening and translation port in the service, along with a name for tagging. You will also specify a protocol to use. Here is an example.
+
+```
+
+apiVersion: v1
+kind: Service
+metadata:
+  ...
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+    name: web
+```

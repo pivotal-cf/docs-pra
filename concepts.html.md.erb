@@ -1,0 +1,38 @@
+---
+title: Primary Technical Concepts
+owner: Customer[0]
+---
+
+<strong><%= modified_date %></strong>
+
+
+## <a id='vxrail_vsphere'></a>Dell EMC VxRail and VMware vSphere
+
+PRA is based on VxRail hyper-converged infrastructure (HCI) hardware from DellEMC. A hyper-converged solution is made up of servers, network switches and management software to create a complete set of data center resources in a single, collapsed system. There is no need to separate storage systems from network systems from compute systems. The VxRail solution includes tools to organize servers into clusters of virtualized compute capacity, establish and format a shared storage target from individual drives in servers and align the networking ports to the needed jobs, all thru automation.
+
+Further, VxRail establishes a lifecycle management system to keep the clusters patched and current with VMware and releases through further automation.
+
+Overall, the purview of VxRail HCI System Software is to take servers in a raw state and deliver a fully paved vSphere installation, complete with vCenter Server managing cluster(s), vSAN shared storage and related constructs.
+
+## <a id='nsx-t'></a>VMware NSX-T Data Center Software Defined Networking
+
+Virtualized, software-defined networking is a core concept adapted to the PRA solution. This important infrastructure layer brings maximum flexibility and growth potential for PRA from small to large systems. NSX-T Data Center brings a few key technologies into play that benefit the solution:
+
+* Tunneled networks of near-infinite capacity for Orgs, Namespaces and Apps to use
+* Bridged interfaces to the datacenter network core that can be expanded and clustered for speed, capacity and redundancy
+* Routing interfaces that are defined and deployed logically for a variety of needs to meet Org, Namespace and App needs, including routing directly to the app container
+* Load balancing logical instances for Apps and Namespaces on-demand
+
+The Enterprise PKS software has native support for NSX-T Data Center built into the product and requires an NSX-T Data Center installation to be complete prior to use. PAS software is also compatible with NSX-T Data Center but does not strictly require its presence.
+
+## <a id='nsx-t'></a>Architecture Review
+
+The overall architecture to PRA is as follows (bottom up view):
+
+* A VxRail HCI cluster, or series of clusters, are organized using VxRail Manager
+* vSphere is paved onto the cluster(s) via VxRail Manager
+* A vSAN shared storage target is organized from local disks in each server per cluster
+* NSX-T Data Center is layered on and a routed interface to the datacenter is established
+* The container platform of choice is layered over the payload cluster(s) and interfaced with NSX-T Data Center for dynamic deployment of networks, routers and load balancers
+
+All of these components build on each other to establish a horizontally-scalable - via host addition to a new or existing cluster - and vertically-scalable - via Memory/Disk/Network addition to existing hosts -  container-ready system that is self-contained and self-healing.

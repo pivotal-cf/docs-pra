@@ -1,0 +1,43 @@
+---
+title: Storage
+owner: Customer[0]
+---
+
+<strong><%= modified_date %></strong>
+
+## <a id='pas_storage'></a>PAS Storage
+
+Pivotal recommends the following capacity allocation for PAS installations:
+
+* For production use, at least 8 TB of data storage, either as one 8 TB store or a number of smaller volumes adding up to 8 TB. High churn or heavily used development foundations may require significantly more storage to accommodate new code and buildpacks.
+* For small installations without many tiles, 4-6 TB may suffice.
+* The primary consumer of storage is the NFS/WebDAV blobstore included in PAS. This job can be externalized to a hardware or emulated software S3-compatible blob store (see below).
+
+## <a id='pas_storage'></a>PAS Blobstore Options
+
+### <a id='elastic_cloud_storage'></a>Elastic Cloud Storage
+
+Dell ECS object storage features a flexible software-defined architecture that provides the simplicity and low-cost benefits of the public cloud without the risk, compliance, and data sovereignty concerns.
+
+PRA can use the ECS platform as its blobstore location to store application code, buildpacks, and applications. The blobstore uses the S3 protocol and can be managed by ECS nodes. The ECS platform provides software-defined object storage that is designed for modern cloud-scale storage requirements.
+
+### <a id='virtual_stream_storage'></a>Virtual Stream Storage
+
+Virtustream Storage Cloud is a hyper-scale, enterprise-class, public cloud object storage platform, built for resiliency and performance. Virtustream provides a unique value proposition with enterprise-class off-premises primary and backup storage.
+
+### <a id='pivotal_internal'></a>Pivotal Internal Blobstore
+
+Pivotal provides an internal WebDAV blobstore that PAS uses to store persistent data.
+The PAS internal blobstore is deployed as a single virtual machine in PAS. It does not offer high availability but can be backed up using Pivotal BOSH Backup and Restore (BBR). It is designed for small, non-production deployments.
+For PAS production-level deployments, Dell EMC and Pivotal recommend using an external S3-compatible blobstore.
+
+## <a id='pks_storage'></a>Enterprise PKS Storage
+
+Enterprise PKS manages multiple Kubernetes clusters, while each cluster storage requirement depends on the size of the cluster and applications. [Enterprise PKS Documentation](https://docs.pivotal.io/runtimes/pks/1-4/volumes.html) has a detailed guidance on Enterprise PKS storage requirements.
+
+Enterprise PKS storage options to support stateful apps include:
+
+* vSAN datastores
+* NFS or VMFS or FC datastores from external sources
+
+vSAN currently does not support sharing datastores across vSphere clusters. If fail-over across availability zones is desired in the multiple cluster architecture, deploying external shared storage across those availability zones  (vSphere clusters) such as VMFS/NFS over iSCSI/FC for both static and dynamic persistent volume provisioning for stateful workloads is supported. Please refer to [Enterprise PKS Documentation](https://docs.pivotal.io/runtimes/pks/1-4/volumes.html) for the implementation details of persistent volume.

@@ -1,0 +1,30 @@
+---
+title: Minimal Viable Platform
+owner: Customer[0]
+---
+
+<strong><%= modified_date %></strong>
+
+Starting small is a great way to get started with container-ready infrastructure. You can read more about each of the key components in subsequent chapters but at this point we introduce the smallest individual configuration recommended for getting started. This configuration is considered stable and functional for trials and small application deployments (requiring only host level fault tolerance) and remote/branch office operation.
+
+## <a id='starter_kit'></a>Enterprise PKS Starter Kit
+
+![PKS Starter Kit](./images/PRA_PKS_vSphere_NSX-T_MVP1.png)
+
+**This configuration includes the following key components:**
+
+* VxRail hyper-converged server in a quad deployment
+* VxRail HCI System deployed for server and vSphere provisioning
+* Leaf switching in a redundant configuration to connected to a spine switch
+* vSAN storage configured for full system use
+* NSX-T Data Center software-defined networking for either PAS, Enterprise PKS or both
+* App container platform of choice (PAS and/or Enterprise PKS from Pivotal)
+* Host groups as needed to organize components for simple HA
+
+**There are a few trade-offs made at this low level of platform worth considering, including:**
+
+* Overall capacity for apps is shared with the infrastructure
+* Management and operational components are kept to a minimum to reduce waste and also reduce recovery after a failure event
+* Storage is at the minimum viable configuration for stable operation during service or unplanned outages
+
+Opportunities for growth will be discussed in subsequent chapters.
