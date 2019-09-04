@@ -9,11 +9,11 @@ owner: Customer[0]
 
 |Edge Node|LB Small|LB Small|LB Medium|LB Medium|LB Large|LB Large|
 |---------|--------|--------|---------|---------|--------|--------|
-|**NSX-T Data Center release**|**2.2**|**2.3**|**2.2**|**2.3**|**2.2**|**2.3**|
+|**NSX-T Data Center release**|**2.3**|**2.4**|**2.3**|**2.4**|**2.3**|**2.4**|
 |Edge VM - Small|-|-|-|-|-|-|
 |Edge VM - Medium|1|1|-|-|-|-|
-|Edge VM - Large|40|40|1|4|-|-|
-|Edge Bare Metal|750|750|75|75|1|7|
+|Edge VM - Large|40|40|4|4|-|1|
+|Edge Bare Metal|750|750|75|75|7|18|
 
 It is recommended to go with a minimum of 4 Large Edge VMs (2 instances is very minimal and necessary for HA) to have a sufficient number of available Load Balancer instances. A production grade deployment should use medium load balancers. Even though there might be 40 small sized load balancers available on a large Edge VM, only the 4 medium sized load balancers are recommended for a production environment.
 
@@ -23,10 +23,10 @@ The size of the Load Balancer determines the number of Virtual Servers, Pools, a
 
 |LB Service|Small|Small|Medium|Medium|Large|Large|
 |---------|--------|--------|---------|---------|--------|--------|
-|**NSX-T Data Center release**|**2.2**|**2.3**|**2.2**|**2.3**|**2.2**|**2.3**|
-|# of Virtual Servers per LB|10|10|100|100|1000|1000|
-|# of Pools per LB|10|20|100|200|1000|2000|
-|# of Pool Memebers per LB|30|200|300|2000|3000|10000|
+|**NSX-T Data Center release**|**2.3**|**2.4**|**2.3**|**2.4**|**2.3**|**2.4**|
+|# of Virtual Servers per LB|10|20|100|100|1000|1000|
+|# of Pools per LB|20|60|200|300|2000|3000|
+|# of Pool Memebers per LB|200|300|2000|2000|10000|7500|
 
 **Important Note**: Since PAS and Enterprise PKS use active/standby Edge Node LB Service, one would always need to consider capacity as per Edge pair to derive the available number of Load Balancer Services. If there are 2 Edge servers, only the load balancer service capacity of one instance can be taken into consideration as the other is treated as stand-by.
 
@@ -34,13 +34,13 @@ The following table shows the capacity for 2 instances of large Edge VM as 4 for
 
 |Edge Cluster|LB Small|LB Small|LB Medium|LB Medium|LB Large|LB Large|
 |---------|--------|--------|---------|---------|--------|--------|
-|**NSX-T Data Center release**|**2.2**|**2.3**|**2.2**|**2.3**|**2.2**|**2.3**|
-|2x Edge VM - Large|40|40|1|4|-|-|
-|4x Edge VM - Large|80|80|2|8|-|-|
-|8x Edge VM - Large|160|160|4|16|-|-|
-|2x Edge Bare Metal|750|750|75|75|1|7|
-|4x Edge Bare Metal|1500|1500|150|150|2|14|
-|8x Edge Bare Metal|3000|3000|300|300|4|28|
+|**NSX-T Data Center release**|**2.3**|**2.4**|**2.3**|**2.4**|**2.3**|**2.4**|
+|2x Edge VM - Large|40|40|4|4|-|-|
+|4x Edge VM - Large|80|80|8|8|-|-|
+|8x Edge VM - Large|160|160|16|16|-|-|
+|2x Edge Bare Metal|750|750|75|75|7|18|
+|4x Edge Bare Metal|1500|1500|150|150|14|36|
+|8x Edge Bare Metal|3000|3000|300|300|28|72|
 
 The number of available Load Balancer instances tied to the Edge instances is directly proportional (1:1) to the maximum number of Kubernetes clusters that can be supported. Each Kubernetes cluster would use minimum of one load balancer from an active Edge instance. Based on the type of load balancer and the Edge, the load balancer instances are fixed. As such, the resulting number of Kubernetes clusters created on the edge are also constrained by the number of free loadbalancer services on the active Edge.
 
