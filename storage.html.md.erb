@@ -33,11 +33,11 @@ For PAS production-level deployments, Dell EMC and Pivotal recommend using an ex
 
 ## <a id='pks_storage'></a>Enterprise PKS Storage
 
-Enterprise PKS manages multiple Kubernetes clusters, while each cluster storage requirement depends on the size of the cluster and applications. [Enterprise PKS Documentation](https://docs.pivotal.io/runtimes/pks/1-4/volumes.html) has a detailed guidance on Enterprise PKS storage requirements.
+Enterprise PKS manages multiple Kubernetes clusters, while each cluster storage requirement depends on the size of the cluster and applications. [Enterprise PKS Documentation](https://docs.pivotal.io/pks/1-4/volumes.html) has a detailed guidance on Enterprise PKS storage requirements.
 
 Enterprise PKS storage options to support stateful apps include:
 
 * vSAN datastores
 * NFS or VMFS or FC datastores from external sources
 
-vSAN currently does not support sharing datastores across vSphere clusters. If fail-over across availability zones is desired in the multiple cluster architecture, deploying external shared storage across those availability zones  (vSphere clusters) such as VMFS/NFS over iSCSI/FC for both static and dynamic persistent volume provisioning for stateful workloads is supported. Please refer to [Enterprise PKS Documentation](https://docs.pivotal.io/runtimes/pks/1-4/volumes.html) for the implementation details of persistent volume.
+vSAN currently does not support sharing datastores across vSphere clusters. If fail-over across availability zones is desired in the multiple cluster architecture, deploying external shared storage across those availability zones  (vSphere clusters) such as VMFS/NFS over iSCSI/FC for both static and dynamic persistent volume provisioning for stateful workloads is supported. Please refer to [Enterprise PKS Documentation](https://docs.pivotal.io/pks/1-4/volumes.html) for the implementation details of persistent volume.
