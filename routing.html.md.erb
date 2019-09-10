@@ -19,12 +19,12 @@ It is recommended to use a minimum of four large Edge VMs (two instances are min
 
 The size of the load balancer determines the number of Virtual Servers, Pools, and Pool Members per LB instance.
 
-|LB Service|Small|Small|Medium|Medium|Large|Large|
-|---------|--------|--------|---------|---------|--------|--------|
-|**NSX-T Data Center release**|**2.3**|**2.4**|**2.3**|**2.4**|**2.3**|**2.4**|
-|# of Virtual Servers per LB|10|20|100|100|1000|1000|
-|# of Pools per LB|20|60|200|300|2000|3000|
-|# of Pool Memebers per LB|200|300|2000|2000|10000|7500|
+|LB Service|Large|Large|
+|---------|--------|--------|
+|**NSX-T Data Center release**|**2.3**|**2.4**|
+|# of Virtual Servers per LB|1000|1000|
+|# of Pools per LB|2000|3000|
+|# of Pool Memebers per LB|10000|7500|
 
 **Important Note**: Since PAS and Enterprise PKS use active/standby Edge Node LB Service, one would always need to consider capacity as per Edge pair to derive the available number of Load Balancer Services. If there are two Edge servers, only the Load Balancer Service capacity of one instance can be taken into consideration as the other is treated as stand-by.
 
@@ -69,8 +69,6 @@ The Benefits of PKS NCP + NSX-T integration:
 Your choice is to select a layer 4 or layer 7 approach; each will be described here. A layer 4 approach is a good choice TCP-bound traffic types and layer 7 is best for HTTP-bound traffic types to/from the app.
 
 ## <a id='PKS Routing'></a>Ingress Controller and Load Balancing for Enterprise PKS
-
-* Ingress Controller - Layer 7 HTTP/S
 
 Ingress             |  Load Balancer
 :-------------------------:|:-------------------------:
