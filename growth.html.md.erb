@@ -9,24 +9,23 @@ Organic growth from MVP1 is expected and encouraged. The next sections will offe
 
 ## <a id='stretch_rack'></a>Single Cluster stretched across three racks
 
-![Across Racks](./images/PRA_PKS_vSphere_NSX-T_MVP1_racks_mgmt.png)
+![Across Racks](./images/PRA_PAS_vSphere_NSX-T_MVP1_racks.png)
 
 **Key items that change are:**
 
-* Two more racks are added to the original. making three racks
-* Each rack represents a vSAN fault domain and vSphere Host Group, equivalent to a PCF availability zone
+* Two more racks are added to the original, making three racks
 * Management functions do not change location
 * The maximum number of hosts per installation is limited to 64 due to vSAN Cluster limitation
 
-Migration from the original rack to using the added racks is possible with PCF by modifying vSphere host group definition and performing a bosh recreate. The PaaS will deploy all components that can be deployed as multiples will be into equal distributions across both AZs (as long as multiples selected are evenly divisible by the number of AZs used)..
+By adding a three physical rack alignment, several features from different parts of the configuration align. Each pair of hosts in a rack is designated a vSAN fault domain. Then, vSphere Host Group are defined to align to these three pairs of hosts which then can be consumed by PAS/PKS as a PCF availability zone.
 
-Repaving is a good choice at this stage, as it will place the singleton and multiple element components in the correct locations.
+Migration from the original rack to using the added racks is possible with PCF by modifying vSphere host group definition and performing a bosh recreate. The PaaS will deploy all components that can be deployed as multiples will be into equal distributions across both AZs (as long as multiples selected are evenly divisible by the number of AZs used).
 
 ## <a id='multiple_cluster'></a>Multiple Cluster Design
 
-![clusters](./images/PRA_clusters.png)
+![clusters](./images/PRA_clusters.png)  replace me
 
-This design is considered production-ready with ample high availability and redundancy capacity for full-time enterprise use. This size is appropriate for combined Enterprise PKS and PAS deployments combined, if desired, using Resource Pools to organize components of each into the clusters.
+This third stage design is considered production-ready with ample high availability and redundancy capacity for full-time enterprise use. This size is appropriate for combined Enterprise PKS and PAS deployments combined, if desired, using Resource Pools within the host groups to organize components of each into the clusters.
 
 **Key items that change at this point in growth**:
 
@@ -36,9 +35,7 @@ This design is considered production-ready with ample high availability and redu
 
 Migration from the starter kit may be a challenge, as all management VMs from vSphere, NSX-T Data Center and Pivotal will be migrated to a dedicated cluster and not blended in with any of the app containers created by Enterprise PKS and/or PAS.
 
-A fresh install of the PaaS layer makes this model the easiest to install.
-
-Repave is a good choice at this stage, as it will give the opportunity to place management components in the proper cluster and evacuate any pre-existing clusters of anything other than payload (app) components.
+A fresh install of the PaaS layer makes this model the easiest to install, as it will give the opportunity to place management components in the proper cluster and evacuate any pre-existing clusters of anything other than payload (app) components.
 
 ## <a id='pks_multiple_cluster'></a>Enterprise PKS Multiple Cluster Design
 

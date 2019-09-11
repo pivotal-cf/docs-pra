@@ -5,6 +5,18 @@ owner: Customer[0]
 
 <strong><%= modified_date %></strong>
 
+## <a id='pks_storage'></a>Enterprise PKS Storage
+
+Enterprise PKS manages multiple Kubernetes clusters, while each cluster storage requirement depends on the size of the cluster and applications. [Enterprise PKS Documentation](https://docs.pivotal.io/runtimes/pks/1-5/volumes.html) has a detailed guidance on Enterprise PKS storage requirements.
+
+VxRail for PRA includes vSAN, which is well applied to PKS needs per vSphere cluster, or in the stretched cluster approach (MVP2), vSAN Fault Domains. This will provide storage for the Enterprise PKS installation in each AZ but there's one additional need for storage: stateful apps.
+
+Enterprise PKS storage options to support stateful apps include:
+
+* NFS, iSCSI or fiber channel datastores from external sources that is common to all clusters/host groups
+
+vSAN currently does not support sharing datastores across vSphere clusters. If fail-over across availability zones is desired in the multiple cluster architecture, deploying external shared storage across those availability zones (nee vSphere clusters) such as NFS/iSCSI/FC for both static and dynamic persistent volume provisioning for stateful workloads is supported. Please refer to [Enterprise PKS Documentation](https://docs.pivotal.io/runtimes/pks/1-4/volumes.html) for the implementation details of persistent volume.
+
 ## <a id='pas_storage'></a>PAS Storage
 
 Pivotal recommends the following capacity allocation for PAS installations:
@@ -30,14 +42,3 @@ Virtustream Storage Cloud is a hyper-scale, enterprise-class, public cloud objec
 Pivotal provides an internal WebDAV blobstore that PAS uses to store persistent data.
 The PAS internal blobstore is deployed as a single virtual machine in PAS. It does not offer high availability but can be backed up using Pivotal BOSH Backup and Restore (BBR). It is designed for small, non-production deployments.
 For PAS production-level deployments, Dell EMC and Pivotal recommend using an external S3-compatible blobstore.
-
-## <a id='pks_storage'></a>Enterprise PKS Storage
-
-Enterprise PKS manages multiple Kubernetes clusters, while each cluster storage requirement depends on the size of the cluster and applications. [Enterprise PKS Documentation](https://docs.pivotal.io/runtimes/pks/1-4/volumes.html) has a detailed guidance on Enterprise PKS storage requirements.
-
-Enterprise PKS storage options to support stateful apps include:
-
-* vSAN datastores
-* NFS or VMFS or FC datastores from external sources
-
-vSAN currently does not support sharing datastores across vSphere clusters. If fail-over across availability zones is desired in the multiple cluster architecture, deploying external shared storage across those availability zones  (vSphere clusters) such as VMFS/NFS over iSCSI/FC for both static and dynamic persistent volume provisioning for stateful workloads is supported. Please refer to [Enterprise PKS Documentation](https://docs.pivotal.io/runtimes/pks/1-4/volumes.html) for the implementation details of persistent volume.

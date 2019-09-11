@@ -13,8 +13,6 @@ A fully meshed Enterprise PKS and PAS installation based on best practices and r
 
 Common elements are the NSX T0 router and the associated T1 routers. This approach allows for any possible cross traffic between Enterprise PKS and PAS apps to stay within the bounds of the T0 router and not exit the NSX overlay. This also provides a convenient, singular access point to the whole installation, making deployments of multiple, identical installations easier to automate.
 
-AZs are aligned to vSphere clusters. Enterprise PKS and PAS share the same Infrastructure and Services VLANs and are controlled by common components from the infrastructure plane.
-
 ## <a id='further_considerations'></a>Further Considerations
 
 It continues to be a good design choice to use Resource Pools in vSphere Clusters as AZ constructs to stack different installations of PCF. As server capacity continues to increase, the efficiency of deploying independent clusters of a server just for one install of one product is low. As customers are commonly deploying servers approaching 1T of RAM, stacking many PCF installations in these clusters improves overall resource utilization.
