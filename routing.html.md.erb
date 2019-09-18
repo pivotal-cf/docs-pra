@@ -70,12 +70,9 @@ Your choice is to select a layer 4 or layer 7 approach; each will be described h
 
 ## <a id='PKS Routing'></a>Ingress Controller and Load Balancing for Enterprise PKS
 
-Ingress             |  Load Balancer
-:-------------------------:|:-------------------------:
-![ingress](./images/ingress.png)  | ![loadbalancer](./images/loadbalancer.png)
-Replace these ^^^ with ones from Omnigraffle design style
-
 ### <a id='ingress routing'></a>Layer 7 Approach Using Ingress Controller
+
+![Ingress Controller](./images/PCF_k8s_LB-L7_Routing.png)
 
 Domain info for ingress is defined in the manifest of the Kubernetes deployment. Here is an example.
 
@@ -99,6 +96,8 @@ spec:
 Describe this ^^^ with SSL integration/configuration.
 
 ### <a id='load balancer routing'></a>Layer 4 Approach Using LoadBalancer Service
+
+![Load Balancing](./images/PCF_k8s_LB-L4_Routing.png)
 
 When pushing a Kubernetes deployment with type set to `LoadBalancer`, NSX-T Data Center automatically creates a new VIP for the deployment on the existing load balancer for that namespace. You will need to specify a listening and translation port in the service, along with a name for tagging. You will also specify a protocol to use. Here is an example.
 
