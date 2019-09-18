@@ -46,9 +46,9 @@ The number of available Load Balancer instances is directly proportional (1:1) t
 
 Learn more about [configuration maximums at VMware's configmax tool](https://configmax.vmware.com/home)
 
-## <a id='PKS NSX-T integration'></a> PKS NCP native with NSX-T for ingress traffic
+## <a id='PKS NSX-T integration'></a> PKS NSX-T Container Plugin for ingress traffic
 
-There is no native way to reach the apps you will place in Enterprise PKS, one must be selected and deployed. What you select influences load balancing choices. Kubernetes has three ways for external users to access services running in a kubernetes cluster:
+There is no native way to reach the apps you will place in Enterprise PKS, one must be selected and deployed. What you select influences load balancing choices. Kubernetes has three ways for external users to access services running in a Kubernetes cluster:
 
 * [NodePort](https://kubernetes.io/docs/concepts/services-networking/service/#nodeport)
 * [Ingress Controller](https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer)
@@ -56,14 +56,14 @@ There is no native way to reach the apps you will place in Enterprise PKS, one m
 
 NSX-T Load Balancer supports both layer 4 and layer 7 ingress traffic, as well as SSL encription
 
-PKS NSX-T container plugin integrates with NSX-T Load Balancer, that K8s operator can interface with kubernetes resources (ingress controller and load balancer) to provision/configure NSX-T Load Balancer.
+PKS NSX-T container plugin integrates with NSX-T Load Balancer, that Kubernetes operator can interface with Kubernetes resources (ingress controller and load balancer) to provision/configure NSX-T Load Balancer.
 
 The Benefits of PKS NCP + NSX-T integration:
 
-* kubernetes users only needs to interface kubernetes resources rather than lower level network infrastructure
+* Kubernetes users only needs to interface Kubernetes resources rather than lower level network infrastructure
 * NSX-T Load Balancer provisioning & configuration setup automatically:
   * Underlay IP assignment (from pre-assigned IP Pool)
-  * Backend Pool configuration to load balancing traffic to kubernetes pods
+  * Backend Pool configuration to load balancing traffic to Kubernetes pods
   * SSL certificate configuration
 
 Your choice is to select a layer 4 or layer 7 approach; each will be described here. A layer 4 approach is a good choice TCP-bound traffic types and layer 7 is best for HTTP-bound traffic types to/from the app.

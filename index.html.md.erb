@@ -15,7 +15,7 @@ PRA enables you to quickly and reliably create an integrated development platfor
 
 The PAS and Enterprise PKS deployments are designed to meet application operational needs. Dell EMC, VMware, and Pivotal Services can help with installing and testing PRA in your IT environment. IT professionals tasked with planning compute, network, and storage capacity can work with Dell EMC Services to determine the sizing requirements for these resources
 
-PRA enables developers to publish, run, and scale legacy, COTS, and cloud-native applications. The PRA platform is based on an integrated infrastructure that enables IT operators to easily manage and scale the development environment with tools such as VxRail Manager and PCF Operations Manager.
+PRA enables developers to publish, run, and scale legacy, packaged software, and cloud-native applications. The PRA platform is based on an integrated infrastructure that enables IT operators to easily manage and scale the development environment with tools such as VxRail Manager and PCF Operations Manager.
 
 With PRA, you benefit from:
 
@@ -29,13 +29,13 @@ With PRA, you benefit from:
 
 ### Validated Versions And Interoperability For This Release
 
-This recommended architecture includes VMware vSphere and NSX-T Data Center, a software-defined network virtualization that runs on VMware ESXi virtual hosts and combines routing, firewall, NAT/SNAT, and load balancing.
+This recommended architecture includes VMware vSphere and NSX-T Data Center, a software-defined network virtualization that runs on VMware ESXi hosts and combines routing, firewalling, NAT/SNAT, and load balancing.
 
 #### Supported Software Components For Interoperability
 
 | Software Component|    Version |
 | ------------- | -------------|
-|VxRail HCI System|4.7.212 and newer|
+|VxRail HCI System Software|4.7.212 and newer|
 |VMware vSphere ESXi|6.7 express patch 10 GA build 13981272|
 |VMware vCenter (VCSA)|v6.7U2c GA build 14070457|
 |VMware vSAN|v6.7 express patch 10|
@@ -49,7 +49,7 @@ This recommended architecture includes VMware vSphere and NSX-T Data Center, a s
 
 To use all the features listed here, NSX-T Data Center **requires at least Advanced licensing** from VMware when used with PAS. The equivalent of that licensing is included with the Enterprise PKS product.
 
-The following Bill of Materials was used to validate this interoperability matrix. These systems were selected as broadly representative of the common customer installations and do not represent an exhaustive list of possibilities.
+The following Bill of Materials was used to validate this interoperability matrix. These systems were selected as broadly representative of the common customer installations and do not limit or represent an exhaustive list of possibilities.
 
 #### Lab Validated Components BOM
 
@@ -62,8 +62,8 @@ The following Bill of Materials was used to validate this interoperability matri
 |VxRail CPU (x2)|Intel(R) Xeon(R) Gold 5120 CPU @ 2.20GHz|
 |VxRail NIC|Intel(R) 10GbE 4P X710 rNDC 4 port|
 |VxRail RAM (x12) per|32GB (x12) DDR-4 2400Mhz|
-|Flash Storage (Cache) (x2)|Toshiba PX05SMB080Y 800GB (x2)|
-|HDD (Capacity) (x4)|Seagate ST2000NX0423 2TB (x4)|
+|Cache Tier|Toshiba PX05SMB080Y 800GB (x2)|
+|Capacity Tier|Seagate ST2000NX0423 2TB (x4)|
 |VMware NSX-T Data Center|2.4.1|
 |Enterprise PKS|1.5.0|
 |Pivotal Application Service|2.6.4|
