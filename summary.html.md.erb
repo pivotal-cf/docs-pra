@@ -10,6 +10,7 @@ owner: Customer[0]
 A fully meshed Enterprise PKS and PAS installation based on best practices and reference design considerations will look as follows:
 
 ![PKS Starter Kit](./images/PRA_PAS_PKS_vSphere_NSX-T_MVP2.png)
+[View a larger version of this diagram](./images/PRA_PAS_PKS_vSphere_NSX-T_MVP2.png).
 
 Common elements are the NSX T0 router and the associated T1 routers. This approach allows for any possible cross traffic between Enterprise PKS and PAS apps to stay within the bounds of the T0 router and not exit the NSX overlay. This also provides a convenient, singular access point to the whole installation, making deployments of multiple, identical installations easier to automate.
 
