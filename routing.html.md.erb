@@ -15,7 +15,7 @@ owner: Customer[0]
 |Edge VM - Large|40|4|1|
 |Edge Bare Metal|750|75|18|
 
-It is recommended to use a minimum of four large Edge VMs (two instances are minimal and necessary for HA) to have a sufficient number of available load balancer instances, which creates a budget of sixteen large load balancer instances. A production grade deployment should use large load balancers. Even though there might be 40 small sized load balancers available on a large Edge VM, only the four large sized load balancers are recommended for a production environment.
+It is recommended to use a minimum of four large Edge VMs (two instances are minimal and necessary for HA) to have a sufficient number of available load balancer instances, which creates a budget of two large load balancer instances. A production grade deployment should use large load balancers. Even though there might be 40 small sized load balancers available on a large Edge VM, only the large sized load balancers are recommended for a production environment.
 
 The size of the load balancer determines the number of Virtual Servers, Pools, and Pool Members per LB instance.
 
