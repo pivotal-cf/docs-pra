@@ -18,7 +18,7 @@ Organic growth from Minimal Viable Platform is expected and encouraged. The next
 * Management functions do not change location
 * The maximum number of hosts for this architecture is limited to 64 due to vSAN cluster limitations
 
-By adding a three physical rack alignment, several features from different parts of the configuration align. Each pair of hosts in a rack is designated a vSAN fault domain. Then, vSphere Host Group are defined to align to these three pairs of hosts which then can be consumed by PAS/PKS as a PCF availability zone.
+By adding a three physical rack alignment, several features from different parts of the configuration align. Each pair of hosts in a rack is designated a [vSAN fault domain](https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.virtualsan.doc/GUID-8491C4B0-6F94-4023-8C7A-FD7B40D0368D.html). Fault domains enable you to protect against rack or chassis failure if your vSAN cluster spans across multiple racks or blade server chassis. You can create fault domains and add one or more hosts to each fault domain. Then, vSphere Host Group are defined to align to these three pairs of hosts which then can be consumed by PAS/PKS as a PCF availability zone.
 
 Migration from the original rack to using the added racks is possible with PCF by modifying vSphere host group definition and performing a bosh recreate. The PaaS will deploy all components that can be deployed as multiples will be equally distributed across all AZs (as long as multiples selected are evenly divisible by the number of AZs used).
 
