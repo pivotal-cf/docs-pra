@@ -41,11 +41,13 @@ This recommended architecture includes VMware vSphere and NSX-T Data Center, a s
 |VMware vSAN|v6.7 express patch 10|
 |VMware NSX-T Data Center|2.4.1 and newer|
 |Pivotal Ops Manager|2.6.latest|
-|Pivotal PAS|2.6.latest|
+|Pivotal PAS|2.6.latest*|
 |Pivotal/VMware Enterprise PKS|1.5.latest|
-|VMware NSX-T Container Plug-in for PCF|2.4.latest|
+|VMware NSX-T Container Plug-in for PCF|2.4.latest*|
 |VMware Harbor Registry|1.8.latest|
 |Dell EMC ECS|[untested in this release, planned for next one]|
+
+<p class="note"><strong>Note: </strong>Compared with PKS, VMware offers PAS/Cloud Foundry NSX-T Container Plug-in (NCP) as a separate product. PAS 2.6 and NCP 2.4 are validated in PRA, but VMware is the ultimate, most current source for a compatibility matrix and support entitlement <a href="https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4.1/rn/NSX-Container-Plugin-241-Release-Notes.html">VMware NSX-T Container Plug-in</a></p>
 
 To use all the features listed here, NSX-T Data Center **requires at least Advanced licensing** from VMware when used with PAS. The equivalent of that licensing is included with the Enterprise PKS product.
 
