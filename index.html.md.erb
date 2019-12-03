@@ -35,17 +35,17 @@ This recommended architecture includes VMware vSphere and NSX-T Data Center, a s
 
 | Software Component|    Version |
 | ------------- | -------------|
-|VxRail HCI System Software|4.7.212 and newer|
-|VMware vSphere ESXi|6.7 express patch 10 GA build 13981272|
-|VMware vCenter (VCSA)|v6.7U2c GA build 14070457|
-|VMware vSAN|v6.7 express patch 10|
-|VMware NSX-T Data Center|2.4.1 and newer|
-|Pivotal Ops Manager|2.6.latest|
-|Pivotal PAS|2.6.latest|
-|Pivotal/VMware Enterprise PKS|1.5.latest|
-|VMware NSX-T Container Plug-in for Pivotal Platform|2.4.latest|
+|VxRail HCI System Software|4.7.300|
+|VMware vSphere ESXi|6.7 Update 3 GA build 14320388|
+|VMware vCenter (VCSA)|6.7 Update 3 GA build 14367737|
+|VMware vSAN|6.7 Update 3 GA build 14320388|
+|VMware NSX-T Data Center|2.5.0 and newer|
+|Pivotal Ops Manager|2.7.latest|
+|Pivotal PAS|2.7.latest|
+|Pivotal/VMware Enterprise PKS|1.6.latest|
+|VMware NSX-T Container Plug-in for Pivotal Platform|2.5.latest|
 |VMware Harbor Registry|1.8.latest|
-|Dell EMC ECS|[untested in this release, planned for next one]|
+|Dell EMC ECS|[3.3.X]|
 
 To use all the features listed here, NSX-T Data Center **requires at least Advanced licensing** from VMware when used with PAS. The equivalent of that licensing is included with the Enterprise PKS product.
 
@@ -56,16 +56,16 @@ The following Bill of Materials was used to validate this interoperability matri
 | Component| Version or Model |
 | ------------- | -------------|
 |VxRail Node Type|E560|
-|VxRail HCI System Software|4.7.212|
-|VxRail BIOS|1.6.12|
-|VxRail iDRAC Firmware|3.32.32.32|
+|VxRail HCI System Software|4.7.300|
+|VxRail BIOS|2.2.11|
+|VxRail iDRAC Firmware|3.34.34.34|
 |VxRail CPU (x2)|Intel(R) Xeon(R) Gold 5120 CPU @ 2.20GHz|
 |VxRail NIC|Intel(R) 10GbE 4P X710 rNDC 4 port|
 |VxRail RAM (x12) per|32GB (x12) DDR-4 2400Mhz|
 |Cache Tier|Toshiba PX05SMB080Y 800GB (x2)|
 |Capacity Tier|Seagate ST2000NX0423 2TB (x4)|
-|VMware NSX-T Data Center|2.4.1|
-|Enterprise PKS|1.5.0|
-|Pivotal Application Service|2.6.4|
-|Pivotal Ops Manager|2.6.7|
-|VMware Harbor Registry|1.8.2|
+|VMware NSX-T Data Center|2.5.0|
+|Enterprise PKS|1.6.0|
+|Pivotal Application Service|2.7.4|
+|Pivotal Ops Manager|2.7.6|
+|VMware Harbor Registry|1.8.6|
