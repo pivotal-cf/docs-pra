@@ -9,7 +9,7 @@ owner: Customer[0]
 
 |Edge Node|LB Small|LB Medium|LB Large|
 |---------|---------|--------|--------|
-|**NSX-T Data Center release**|**2.4**|**2.4**|**2.4**|
+|**NSX-T Data Center release**|**2.5**|**2.5**|**2.5**|
 |Edge VM - Small (not recommended)|-|-|-|
 |Edge VM - Medium (not recommended)|1|-|-|
 |Edge VM - Large|40|4|1|
@@ -23,7 +23,7 @@ The size of the load balancer determines the number of Virtual Servers, Pools, a
 
 |LB Service|Large|
 |---------|--------|
-|**NSX-T Data Center release**|**2.4**|
+|**NSX-T Data Center release**|**2.5**|
 |# of Virtual Servers per LB|1000|
 |# of Pools per LB|3000|
 |# of Pool Memebers per LB|7500|
@@ -34,7 +34,7 @@ The following table shows the capacity for two instances of large Edge VM as fou
 
 |Edge Cluster|LB Small|LB Medium|LB Large|
 |---------|---------|--------|--------|
-|**NSX-T Data Center release**|**2.4**|**2.4**|**2.4**|
+|**NSX-T Data Center release**|**2.5**|**2.5**|**2.5**|
 |2x Edge VM - Large|40|4|1|
 |4x Edge VM - Large|80|8|2|
 |8x Edge VM - Large|160|16|4|
@@ -44,7 +44,7 @@ The following table shows the capacity for two instances of large Edge VM as fou
 
 The number of available Load Balancer instances is directly proportional (1:1) to the maximum number of Kubernetes clusters that can be supported. Each Kubernetes cluster would use minimum of one load balancer from an active Edge instance. Based on the type of load balancer and the Edge, the load balancer instances are fixed. As such, the resulting number of Kubernetes clusters created on the edge are also constrained by the number of free loadbalancer services on the active Edge.
 
-**Note**: Maximum number of Edge nodes per Edge Cluster is 10 (as of NSX-T Data Center 2.4). If the number of Edge nodes is greater than 10, create additional Edge clusters. If the Load Balancer service capacity is fully utilized on a given Edge pair, then install and bring up additional Edge VM instance pairs in the same Edge Cluster to handle requirements for additional load balancers (for existing or new Enterprise PKS clusters).
+**Note**: Maximum number of Edge nodes per Edge Cluster is 10 (as of NSX-T Data Center 2.5). If the number of Edge nodes is greater than 10, create additional Edge clusters. If the Load Balancer service capacity is fully utilized on a given Edge pair, then install and bring up additional Edge VM instance pairs in the same Edge Cluster to handle requirements for additional load balancers (for existing or new Enterprise PKS clusters).
 
 Learn more about [configuration maximums at VMware's configmax tool](https://configmax.vmware.com/home)
 
