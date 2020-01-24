@@ -26,7 +26,7 @@ The size of the Load Balancer determines the number of Virtual Servers, Pools, a
 |**NSX-T Data Center release**|**2.2**|**2.3**|**2.2**|**2.3**|**2.2**|**2.3**|
 |# of Virtual Servers per LB|10|10|100|100|1000|1000|
 |# of Pools per LB|10|20|100|200|1000|2000|
-|# of Pool Memebers per LB|30|200|300|2000|3000|10000|
+|# of Pool Members per LB|30|200|300|2000|3000|10000|
 
 **Important Note**: Since PAS and Enterprise PKS use active/standby Edge Node LB Service, one would always need to consider capacity as per Edge pair to derive the available number of Load Balancer Services. If there are 2 Edge servers, only the load balancer service capacity of one instance can be taken into consideration as the other is treated as stand-by.
 
@@ -48,7 +48,7 @@ The number of available Load Balancer instances tied to the Edge instances is di
 
 ## <a id='pks routing'></a>Ingress Routing and Load Balancing for Enterprise PKS
 
-How you select ingress routing influences load balancing choices. You’re going to want both ingress routing and load balancing.
+How you select ingress routing influences load balancing choices. You're going to want both ingress routing and load balancing.
 
 * Ingress Routing - Layer 7
 * Service Type:LoadBalancer - Layer 4
