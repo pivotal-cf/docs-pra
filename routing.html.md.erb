@@ -24,7 +24,7 @@ The size of the load balancer determines the number of Virtual Servers, Pools, a
 |**NSX-T Data Center release**|**2.4**|
 |# of Virtual Servers per LB|1000|
 |# of Pools per LB|3000|
-|# of Pool Memebers per LB|7500|
+|# of Pool Members per LB|7500|
 
 **Important Note**: Since PAS and Enterprise PKS use active/standby Edge Node LB Service, one would always need to consider capacity as per Edge pair to derive the available number of Load Balancer Services. If there are two Edge servers, only the Load Balancer Service capacity of one instance can be taken into consideration as the other is treated as stand-by.
 
@@ -54,7 +54,7 @@ There is no native way to reach the apps you will place in Enterprise PKS, one m
 * [Ingress Controller](https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer)
 * [LoadBalancer Service](https://kubernetes.io/docs/concepts/services-networking/ingress)
 
-NSX-T Load Balancer supports both layer 4 and layer 7 ingress traffic, as well as SSL encription
+NSX-T Load Balancer supports both layer 4 and layer 7 ingress traffic, as well as SSL encryption
 
 PKS NSX-T container plugin integrates with NSX-T Load Balancer, that Kubernetes operator can interface with Kubernetes resources (ingress controller and load balancer) to provision/configure NSX-T Load Balancer.
 
