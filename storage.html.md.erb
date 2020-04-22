@@ -5,17 +5,17 @@ owner: Customer[0]
 
 <strong><%= modified_date %></strong>
 
-## <a id='pks_storage'></a>Enterprise PKS Storage
+## <a id='TKGi_storage'></a>Enterprise TKG-i Storage
 
-Enterprise PKS manages multiple Kubernetes clusters. Each cluster's storage requirements depend on the size of the cluster and applications deployed. Detailed guidance on these storage requirements can be found in the [Enterprise PKS Documentation](https://docs.pivotal.io/pks/1-5/volumes.html).
+TKG-i manages multiple Kubernetes clusters. Each cluster's storage requirements depend on the size of the cluster and applications deployed. Detailed guidance on these storage requirements can be found in the [TKG-i Documentation](https://docs.pivotal.io/pks/1-7/volumes.html).
 
-VxRail for PRA includes vSAN, which is well applied to PKS needs per vSphere cluster, or in the stretched cluster approach (MVP2), vSAN Fault Domains. This will provide storage for the Enterprise PKS installation in each AZ but there's one additional need for storage: stateful apps.
+VxRails used in TA4V include vSAN, which is well applied to TKG-i needs on a per vSphere cluster basis, or in the stretched cluster approach (MVP2), vSAN Fault Domains. This will provide storage for the Enterprise TKG-i installation in each AZ but there's one additional need for storage: stateful apps.
 
-Enterprise PKS storage options to support stateful apps include:
+Enterprise TKG-i storage options to support stateful apps include:
 
 * NFS, iSCSI or fiber channel datastores from external sources that is common to all clusters/host groups
 
-vSAN currently does not support sharing datastores across vSphere clusters. As fail-over across availability zones is desired in the multiple cluster architecture, deploying external shared storage across those availability zones (nee vSphere clusters) such as NFS/iSCSI/FC for both static and dynamic persistent volume provisioning for stateful workloads is supported. Please refer to [Enterprise PKS Documentation](https://docs.pivotal.io/pks/1-4/volumes.html) for the implementation details of persistent volume.
+vSAN currently does not support sharing datastores across vSphere clusters. As fail-over across availability zones is desired in the multiple cluster architecture, deploying external shared storage across those availability zones (nee vSphere clusters) such as NFS/iSCSI/FC for both static and dynamic persistent volume provisioning for stateful workloads is supported. Please refer to [Enterprise TKG-i Documentation](https://docs.pivotal.io/pks/1-7/volumes.html) for the implementation details of persistent volumes.
 
 ## <a id='pas_storage'></a>PAS Storage
 
@@ -31,7 +31,7 @@ Pivotal recommends the following capacity allocation for PAS installations:
 
 Dell EMC ECS object storage features a flexible software-defined architecture that provides the simplistic benefits of the public cloud without the risk, compliance, and data sovereignty concerns.
 
-PRA can use the ECS platform as its blobstore location to store application code, buildpacks, and applications. The blobstore uses the S3 protocol and can be managed by ECS nodes. The ECS platform provides software-defined object storage that is designed for modern cloud-scale storage requirements.
+TA4V can use the ECS platform as its blobstore location to store application code, buildpacks, and applications. The blobstore uses the S3 protocol and can be managed by ECS nodes. The ECS platform provides software-defined object storage that is designed for modern cloud-scale storage requirements.
 
 ### <a id='virtual_stream_storage'></a>Virtustream Storage Cloud
 
