@@ -36,16 +36,16 @@ This recommended architecture includes VMware vSphere and NSX-T Data Center, a s
 
 | Software Component|    Version |
 | ------------- | -------------|
-|VxRail HCI System Software|4.7.4--|
-|VMware vSphere ESXi|7.0 GA build --------|
-|VMware vCenter (VCSA)|7.0 GA build -------|
-|VMware vSAN|7.0 GA build ------|
-|VMware NSX-T Data Center|3.0 and newer|
-|Tanzu Ops Manager|2.9.latest|
-|Tanzu Application Service for VMs|2.9.latest|
-|Tanzu Kubernetes Grid-integrated|1.7.latest|
-|VMware NSX-T Container Plug-in for TAS4VMs|?.?.latest|
-|VMware Harbor Registry|1.?.latest|
+|VxRail HCI System Software|4.7.410 and newer|
+|VMware vSphere ESXi|6.7 Patch 01 GA build 15160138|
+|VMware vCenter (VCSA)|6.7 Update 3b GA build 15132721|
+|VMware vSAN|6.7 Patch 01 GA build 15160138|
+|VMware NSX-T Data Center|2.5.1|
+|Tanzu Ops Manager|2.8.latest|
+|Tanzu Application Service for VMs|2.8.latest|
+|VMware Tanzu Kubernetes Grid-integrated|1.7.0|
+|VMware NSX-T Container Plug-in for Pivotal Platform|2.5.1|
+|VMware Harbor Registry|1.10.latest|
 |Dell EMC ECS|3.3.X|
 
 To use all the features listed here, NSX-T Data Center **requires at least Advanced licensing** from VMware when used with TAS for VMs. The equivalent of that licensing is included with TKG-i.
@@ -57,17 +57,17 @@ The following Bill of Materials was used to validate this interoperability matri
 | Component| Version or Model |
 | ------------- | -------------|
 |VxRail Node Type|E560|
-|VxRail HCI System Software|4.7.4--|
-|VxRail BIOS|?.?.??|
-|VxRail iDRAC Firmware|?.??.??.??|
+|VxRail HCI System Software|4.7.410|
+|VxRail BIOS|2.4.8|
+|VxRail iDRAC Firmware|3.36.36.37|
 |VxRail CPU (x2)|Intel(R) Xeon(R) Gold 5120 CPU @ 2.20GHz|
 |VxRail NIC|Intel(R) 10GbE 4P X710 rNDC 4 port|
 |VxRail RAM (x12) per|32GB (x12) DDR-4 2400Mhz|
 |Cache Tier|Toshiba PX05SMB080Y 800GB (x2)|
 |Capacity Tier|Seagate ST2000NX0423 2TB (x4)|
-|VMware NSX-T Data Center|3.0.0|
-|Tanzu Kubernetes Grid-i|1.7.0|
-|Tanzu Application Service|2.9.?|
-|Tanzu Ops Manager|2.9.?|
-|VMware Harbor Registry|1.9.3|
+|VMware NSX-T Data Center|2.5.1|
+|VMware Tanzu Kubernetes Grid-integrated|1.7.0|
+|Tanzu Application Service for VMs|2.8.5|
+|Tanzu Ops Manager|2.8.5|
+|VMware Harbor Registry|1.10.1|
 |Dell EMC ECS|3.3.0|
