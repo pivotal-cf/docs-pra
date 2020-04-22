@@ -1,46 +1,54 @@
 ---
-title: Growth Beyond Minimum Viable Platform
+title: Growth Beyond Minimal Viable Platform
 owner: Customer[0]
 ---
 
 <strong><%= modified_date %></strong>
 
-Organic growth from Minimal Viable Platform is expected and encouraged. The next sections will offer considerations on growing from a lower to a higher level of fault tolerant architecture progressively.
+Organic growth from the Minimal Viable Platform (MVP) to a more complex system is expected and encouraged. The next sections will offer considerations on growing from a lower to a higher level of fault tolerant architecture progressively.
 
-## <a id='stretch_rack'></a>Single Cluster stretched across three racks
+## <a id='stretch_rack'></a>Single Cluster Stretched Across Three Racks
 
-![Across Racks](./images/PRA_PAS_vSphere_NSX-T_MVP1_racks.png)
-[View a larger version of this diagram](./images/PRA_PAS_vSphere_NSX-T_MVP1_racks.png).
+![Across Racks](./images/TA4V_TAS4VMs_vSphere_NSX-T_MVP1_racks.png)
+[View a larger version of this diagram](./images/TA4V_TAS4VMs_vSphere_NSX-T_MVP1_racks.png).
 
 **Key items that change are:**
 
-* Two more racks are added to the original, making three racks
+* Two more physical racks are added to the original, establishing a three rack / three AZ configuration
+
+The maximum number of hosts per cluster for this architecture is limited to 64 hosts. The maximum number of hosts in this model is 192 hosts and 40,000 powered-on VMs.
+
+**Unchanged items as compared to MVP:**
+
 * Management functions do not change location
-* The maximum number of hosts for this architecture is limited to 64 due to vSAN cluster limitations
 
-By adding a three physical rack alignment, several features from different parts of the configuration align. Each pair of hosts in a rack is designated a [vSAN fault domain](https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.virtualsan.doc/GUID-8491C4B0-6F94-4023-8C7A-FD7B40D0368D.html). Fault domains enable you to protect against rack or chassis failure if your vSAN cluster spans across multiple racks or blade server chassis. You can create fault domains and add one or more hosts to each fault domain. Then, vSphere Host Group are defined to align to these three pairs of hosts which then can be consumed by PAS/PKS as a Pivotal Platform availability zone.
+By adding a three physical rack alignment, several HA features from different parts of the configuration align. Each pair of hosts in a rack is designated a [vSAN fault domain](https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.vsan.doc/GUID-8491C4B0-6F94-4023-8C7A-FD7B40D0368D.html). Fault Domains enable you to protect shared storage against rack or chassis failure if your vSAN cluster spans across multiple racks or blade server chassis. You can create fault domains and add one or more hosts to each fault domain. Increasing the high availability of shared storage is a key contributor to improved platform resiency in the event of a loss or failure. At this stage, we add in a crutial improvement to the shared storage HA solution.
 
-Migration from the original rack to using the added racks is possible with Pivotal Platform by modifying vSphere host group definition and performing a bosh recreate. The PaaS will deploy all components that can be deployed as multiples will be equally distributed across all AZs (as long as multiples selected are evenly divisible by the number of AZs used).
+Then, vSphere Host Groups are defined to align to the three racks of hosts which then can be consumed by TAS for VMs/TKG-i as an Availability Zone. The Host Groups feature is a great way to pin the application containers capacity usage to a set of compute & memory aggregate that is cluster-aligned without having to equal the entire cluster regardless of size while also being akin to a Resource Pool in the cluster without having to sub-segment the available compute & memory using shares.
+
+If the intent is to dedicate the entire installation to application contasiners, then Host Groups are less valuable as you can just set the entire cluster as an AZ. But, if there is the desire to blend application containers with any other kind of workload, even two different kinds of application container technologies at once, Host Groups fit well to segment capacity without the constraint of resource shares.
+
+Migration from the original rack to using the added racks is possible with TAS for VMs by modifying vSphere host group definition and performing a `bosh recreate` operation. The PaaS will deploy all non-singleton components evenly across all AZs as long as multiples selected are evenly divisible by the number of AZs used. Be certain to review how many non-singleton jobs are defined, for example, gorouters, and use a count evenly diviable by AZs, three in this model.
 
 ## <a id='multiple_cluster'></a>Multiple Cluster Design
 
-PRA Multiple Cluster Design
-![clusters](./images/PRA_vSphere_3Cluster_AZs_Only.png)
-[View a larger version of this diagram](./images/PRA_vSphere_3Cluster_AZs_Only.png).
+TA4V Multiple Cluster Design
+![clusters](./images/TA4V_vSphere_3Cluster_AZs_Only.png)
+[View a larger version of this diagram](./images/TA4V_vSphere_3Cluster_AZs_Only.png).
 
-This third stage design is considered production-ready with ample high availability and redundancy capacity for full-time enterprise use. This size is appropriate for combined Enterprise PKS and PAS deployments combined, if desired, using Resource Pools within the host groups to organize components of each into the clusters.
+This third stage design is production-ready with ample high availability and redundant capacity for full-time Enterprise use. This size is appropriate for combined TKG-i and TAS for VMs deployments, if desired, using host groups (or Resource Pools with/without host groups) to organize components of each against cluster capacity. There is no practical reason to scale horizontally (more clusters/AZs) from this model as the upper limits of aggregate compute & memory far exceed the capability of the software components that make it up. If ture exascale capacity is desired, a better approach is to deploy three of these models in parallel as opposed to one, bigger one.
 
 **Key items that change at this point in growth**:
 
-* A total of four clusters are deployed: one for management of the whole system and three for payloads generated by the system.
-* All management functions are deployed onto a dedicated management cluster of six VxRail Appliance. The remaining three clusters are AZs for Pivotal Platform product(s) and for payload (app) use only.
-* All PaaS components that deploy in multiples, are deployed in group of three to take advantage of three availability zones. HA features of both the IaaS and PaaS are brought to bear on the AZs.
+* A total of four clusters are deployed: one for management of the entire system and three for payloads generated by the system.
+* All management functions are deployed onto the dedicated management cluster of six VxRail Appliances (as shown). The remaining three clusters are assigned as AZs for PaaS and for VM payload (app) use only.
+* All PaaS components that deploy in multiples are deployed in multiples of three to take advantage of three availability zones. HA features of both the IaaS and PaaS are in effect for the AZs.
 
-Migration from the Starter Kit may be a challenge, as all management VMs from vSphere, NSX-T Data Center and Pivotal will be migrated to a dedicated cluster and not blended in with any of the app containers created by Enterprise PKS and/or PAS.
+Migration from the MVP1 model to this model directly will be a challenge, as all management VMs from vSphere, NSX-T Data Center and PaaS will be migrated to a dedicated cluster and not blended in with any of the app containers created by TKG-i and/or TAS for VMs. A fresh install of the PaaS layer (at least) makes this model the easiest to install, as it will give the opportunity to place management components in the proper cluster and evacuate any pre-existing clusters of anything other than payload (app) components.
 
-A fresh install of the PaaS layer makes this model the easiest to install, as it will give the opportunity to place management components in the proper cluster and evacuate any pre-existing clusters of anything other than payload (app) components.
+Migrating from the Single Cluster/Three Racks (MVP2) model to this one will also include challenges with relocating management functions from the (now) payload cluster to the new management cluster. This can be accomplished as long as there are shared networks and storage between the current managment location and the new management cluster to facilitate vMotion and storage-vMotions of them. Or, a consolidation of all mangement functions onto a single rack's hosts prior to addition of new capacity could be accomplished. The approach is to evacuate all mangement fuinctions from the existing racks targeted for payloads in favor of placement on the new management cluster however best that is accomplished in your environment.
 
-## <a id='pks_multiple_cluster'></a>Enterprise PKS Multiple Cluster Design
+## <a id='TKG-i_multiple_cluster'></a>TKG-i Multiple Cluster Design
 
-![PKS clusters](./images/PRA_PKS_vSphere_NSX-T_MVP2.png)
-[View a larger version of this diagram](./images/PRA_PKS_vSphere_NSX-T_MVP2.png).
+![TKG-i clusters](./images/TA4V_TKGi_vSphere_NSX-T_MVP2.png)
+[View a larger version of this diagram](./images/TA4V_TKGi_vSphere_NSX-T_MVP2.png).
