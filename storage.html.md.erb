@@ -5,27 +5,30 @@ owner: Customer[0]
 
 <strong><%= modified_date %></strong>
 
-## <a id='TKGi_storage'></a>Enterprise TKG-i Storage
+## <a id='TKGi_storage'></a>Kubernetes Storage Considerations (TKG-i Storage)
 
-TKG-i manages multiple Kubernetes clusters. Each cluster's storage requirements depend on the size of the cluster and applications deployed. Detailed guidance on these storage requirements can be found in the [TKG-i Documentation](https://docs.pivotal.io/pks/1-7/volumes.html).
+TKG-i manages multiple Kubernetes clusters spaced across multiple vSphere clusters. Each kubernetes cluster's storage requirements depend on the size of the cluster and applications deployed. Detailed guidance on these storage requirements can be found in the [TKG-i Documentation](https://docs.pivotal.io/pks/1-7/volumes.html).
 
-VxRails used in TA4V include vSAN, which is well applied to TKG-i needs on a per vSphere cluster basis, or in the stretched cluster approach (MVP2), vSAN Fault Domains. This will provide storage for the Enterprise TKG-i installation in each AZ but there's one additional need for storage: stateful apps.
+VxRails used in TA4V include vSAN, which is well applied to TKG-i needs on a per vSphere cluster basis, or in the stretched cluster approach (MVP2), vSAN Fault Domains. This will provide storage for the TKG-i installation in each AZ but there's one additional need for storage: stateful apps. You can not look to vSAN to satisfy the storage needs for cross-cluster common storage.
 
-Enterprise TKG-i storage options to support stateful apps include:
+**TKG-i storage options to support stateful apps include:**
 
-* NFS, iSCSI or fiber channel datastores from external sources that is common to all clusters/host groups
+* NFS, iSCSI and fiber channel datastores from external sources that are common to all clusters/host groups
 
-vSAN currently does not support sharing datastores across vSphere clusters. As fail-over across availability zones is desired in the multiple cluster architecture, deploying external shared storage across those availability zones (nee vSphere clusters) such as NFS/iSCSI/FC for both static and dynamic persistent volume provisioning for stateful workloads is supported. Please refer to [Enterprise TKG-i Documentation](https://docs.pivotal.io/pks/1-7/volumes.html) for the implementation details of persistent volumes.
+vSAN does not support sharing datastores across vSphere clusters. As fail-over across availability zones is desired in the multiple cluster architecture, deploying external shared storage across those vSphere clusters / availability zones such as NFS/iSCSI/FC for both static and dynamic persistent volume provisioning for stateful workloads is recommended. Please refer to [TKG-i Documentation](https://docs.pivotal.io/pks/1-7/volumes.html) for the implementation details of persistent volumes.
 
-## <a id='pas_storage'></a>PAS Storage
+In summary: You must provide a shared storage target for TKG-i to use across all clusters in use for stateful apps that can not be a cluster's vSAN, unless there is only one cluster used by TKG-i, or shared storage is not drawn from vSAN, or no stateful apps are to be deployed.
 
-Pivotal recommends the following capacity allocation for PAS installations:
+## <a id='tas4vms_storage'></a>Cloud Foundry Storage Considerations (TAS for VMs Storage)
 
-* For production use, at least 8 TB of data storage, either as one 8 TB store or a number of smaller volumes adding up to 8 TB. High churn or heavily used development foundations may require significantly more storage to accommodate new code and buildpacks.
-* For small installations without many tiles, 4-6 TB may be suffice.
-* The primary consumer of storage is the NFS/WebDAV blobstore included in PAS. This job can be externalized to a hardware or emulated software S3-compatible blob store (see below).
+VMware recommends the following capacity allocation for TAS for VMs installations:
 
-## <a id='pas_storage'></a>PAS Blobstore Options
+* For production use, at least 8 TB of available capacity, either as one 8 TB store or a number of smaller volumes adding up to 8 TB. High churn or heavily used development foundations may require significantly more storage to accommodate new code and buildpacks. A "development" PaaS installation will see siginifcantly higher storage consumption than a "production" one due to rapid app prototyping and blob creation.
+* For small installations without many tiles, 4-6 TB may suffice.
+* The primary consumer of storage is the NFS/WebDAV blobstore included in TAS for VMs. This job can be externalized to a hardware or emulated software S3-compatible blob store (see below).
+* Do not use the included TAS for VMs blob store VM in any production PaaS Foundation.
+
+## <a id='tas4vms_storage'></a>TAS for VMs Blobstore Options
 
 ### <a id='elastic_cloud_storage'></a>Elastic Cloud Storage
 
@@ -39,6 +42,4 @@ Virtustream Storage Cloud is a hyper-scale, enterprise-class, public cloud objec
 
 ### <a id='pivotal_internal'></a>Pivotal Internal Blobstore
 
-Pivotal provides an internal WebDAV blobstore that PAS uses to store persistent data.
-The PAS internal blobstore is deployed as a single virtual machine in PAS. It does not offer high availability but can be backed up using Pivotal BOSH Backup and Restore (BBR). It is designed for small, non-production deployments.
-For PAS production-level deployments, Dell EMC and Pivotal recommend using an external S3-compatible blobstore.
+Pivotal provides an internal WebDAV blobstore that TAS for VMs uses to store persistent data. The TAS for VMs internal blobstore is deployed as a single virtual machine in TAS for VMs. It does not offer high availability but can be backed up using BOSH Backup and Restore (BBR). It is designed for small, non-production deployments. For TAS for VMs production-level deployments, Dell EMC and VMware recommend using an external S3-compatible blobstore.
