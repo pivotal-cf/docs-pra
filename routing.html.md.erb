@@ -7,46 +7,21 @@ owner: Customer[0]
 
 ## <a id='nsxt_lb'></a>NSX-T Data Center Edge Type and Load Balancer capacity planning
 
-|Edge Node|LB Small|LB Medium|LB Large|
-|---------|---------|--------|--------|
-|**NSX-T Data Center release**|**2.5**|**2.5**|**2.5**|
-|Edge VM - Small (not recommended)|-|-|-|
-|Edge VM - Medium (not recommended)|1|-|-|
-|Edge VM - Large|40|4|1|
-|Edge Bare Metal|750|75|18|
+It is recommended to use a minimum of four large Edge VMs in a configuration of two active-standby pairs (at least two instances are necessary for HA) to have a sufficient number of available load balancer instances. This offers a budget of two large load balancer instances. A production grade deployment should only use large load balancers.
 
-It is recommended to use a minimum of four large Edge VMs (two instances are minimal and necessary for HA) to have a sufficient number of available load balancer instances, which creates a budget of two large load balancer instances. A production grade deployment should use large load balancers. Even though there might be 40 small sized load balancers available on a large Edge VM, only the large sized load balancers are recommended for a production environment.
+They type of Edge deployment is up to you based on your needs and capacity. Edges as VMs offers maximum flexibility and use of the physical resources but the limits on bare metal Edges is far higher. Since TA4A is a "hyperconverged" or "collapsed" model, the approach of using VMs for Edges is a natural fit. VMware recommends starting with Edges as VMs until the system capacity is exhausted, then adding bare-metal Edes or more virtualized capacity for Edge VMs as necessary.
 
-Since NSX-T 2.5, users can assign edges to defined fault domains. When TKG-i provisions load balancer T1 router, the active and passive edges are assigned on separate zones automatically, which increases the resiliency.
+Introduced in NSX-T 2.5, users can assign edges to defined fault domains. When TKG-i provisions load balancer T1 routers, the active and passive edges are assigned on separate zones automatically, which increases the resiliency.
 
-The size of the load balancer determines the number of Virtual Servers, Pools, and Pool Members per LB instance.
+The size of the load balancer determines the number of Virtual Servers, Pools, and Pool Members per LB instance. Learn more about [configuration maximums at VMware's Configuration Maximums site](https://configmax.vmware.com/home)
 
-|LB Service|Large|
-|---------|--------|
-|**NSX-T Data Center release**|**2.5**|
-|# of Virtual Servers per LB|1000|
-|# of Pools per LB|3000|
-|# of Pool Members per LB|7500|
-
-**Important Note**: Since TAS for VMs and TKG-i use active/standby Edge Node LB Service, one would always need to consider capacity as per Edge pair to derive the available number of Load Balancer Services. If there are two Edge servers, only the Load Balancer Service capacity of one instance can be taken into consideration as the other is treated as stand-by.
-
-The following table shows the capacity for two instances of large Edge VM as four for medium sized load balancers even though each Edge instance itself does have four load balance instance capacity.
-
-|Edge Cluster|LB Small|LB Medium|LB Large|
-|---------|---------|--------|--------|
-|**NSX-T Data Center release**|**2.5**|**2.5**|**2.5**|
-|2x Edge VM - Large|40|4|1|
-|4x Edge VM - Large|80|8|2|
-|8x Edge VM - Large|160|16|4|
-|2x Edge Bare Metal|750|75|18|
-|4x Edge Bare Metal|1500|150|36|
-|8x Edge Bare Metal|3000|300|72|
+**Important Note**: Since TAS for VMs and TKG-i use active/standby Edge Node Load Balancer Service, one would always need to consider capacity as per Edge pair to derive the available number of Load Balancer Services. If there are two Edge servers, only the Load Balancer Service capacity of one instance can be taken into consideration as the other is treated as stand-by.
 
 The number of available Load Balancer instances is directly proportional (1:1) to the maximum number of Kubernetes clusters that can be supported. Each Kubernetes cluster would use minimum of one load balancer from an active Edge instance. Based on the type of load balancer and the Edge, the load balancer instances are fixed. As such, the resulting number of Kubernetes clusters created on the edge are also constrained by the number of free loadbalancer services on the active Edge.
 
 **Note**: Maximum number of Edge nodes per Edge Cluster is 10 (as of NSX-T Data Center 2.5). If the number of Edge nodes is greater than 10, create additional Edge clusters. If the Load Balancer service capacity is fully utilized on a given Edge pair, then install and bring up additional Edge VM instance pairs in the same Edge Cluster to handle requirements for additional load balancers (for existing or new TKG-i clusters).
 
-Learn more about [configuration maximums at VMware's configmax tool](https://configmax.vmware.com/home)
+Learn more about [configuration maximums at VMware's Configuration Maximums site](https://configmax.vmware.com/home)
 
 ## <a id='PKS NSX-T integration'></a> TKG-i NSX-T Container Plugin for ingress traffic
 
@@ -87,7 +62,7 @@ metadata:
   namespace: music1
 spec:
   rules:
-  - host: music1.Enterprise_PKS.domain.com
+  - host: music1.tkgi.domain.com
     http:
       paths:
       - path: /.*
@@ -95,8 +70,6 @@ spec:
           serviceName: music-service
           servicePort: 8080
 ```
-
-Describe this ^^^ with SSL integration/configuration.
 
 ### <a id='load balancer routing'></a>Layer 4 Approach Using LoadBalancer Service
 
@@ -106,7 +79,6 @@ Describe this ^^^ with SSL integration/configuration.
 When pushing a Kubernetes deployment with type set to `LoadBalancer`, NSX-T Data Center automatically creates a new VIP for the deployment on the existing load balancer for that namespace. You will need to specify a listening and translation port in the service, along with a name for tagging. You will also specify a protocol to use. Here is an example.
 
 ```
-
 apiVersion: v1
 kind: Service
 metadata:
