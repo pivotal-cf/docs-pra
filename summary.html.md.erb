@@ -20,6 +20,8 @@ Common elements are the NSX T0 router and the associated T1 routers. This approa
 
 ## <a id='further_considerations'></a>Further Considerations
 
-The Host Groups feature introduced in TAS for VMs v2.XX superceeds the recommendation to use Resource Pools in vSphere Clusters as AZ constructs to stack different installations of PaaS. As server capacity continues to increase, the efficiency of deploying independent clusters of a server just for one install of one product is low. As customers are commonly deploying servers approaching 1T of RAM, stacking many Pivotal Platform installations in these clusters improves overall resource utilization.
+With a single vSphere Cluster, the Host Groups feature introduced in Ops Manager v2.7 can be used in conjuntion with Resource Pools in vSphere Clusters as AZ constructs to stack different installations of PaaS. Host Groups provide a way to pin hardware resources to an AZ, Resource Pools can provide a way to share an aggregate of host resources.
+
+As server capacity continues to increase, the efficiency of deploying independent clusters of a server just for one install of one product is low. As customers are commonly deploying servers approaching 1T of RAM, stacking many installations in these clusters improves overall resource utilization.
 
 You may be tempted to split the TAS for VMs and TKG-i installations into separate network parent/child configurations, behind separate T0 routers. Before doing this, review [VMware's best practices](https://www.vmware.com/support/pubs/vmware-validated-design-pubs.html) for T0 to T0 routing efficiencies and weaknesses to ensure that approach meets your needs.
