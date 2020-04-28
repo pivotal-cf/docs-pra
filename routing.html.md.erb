@@ -49,13 +49,13 @@ Your choice is to select a layer 4 or layer 7 approach; each will be described h
 
 ### <a id='ingress routing'></a>Layer 7 Approach Using Ingress Controller
 
-![Ingress Controller](./images/PKS_NSX-T_Ingress_Routing.png)
-[View a larger version of this diagram](./images/PKS_NSX-T_Ingress_Routing.png).
+![Ingress Controller](./images/TKGi_NSX-T_L7_Ingress_Routing.png)
+[View a larger version of this diagram](./images/TKGi_NSX-T_L7_Ingress_Routing.png).
 
 Domain info for ingress is defined in the manifest of the Kubernetes deployment. Here is an example.
 
 ```
-apiVersion: extensions/v1beta1
+apiVersion: extensions/v1
 kind: Ingress
 metadata:
   name: music-ingress
@@ -73,8 +73,8 @@ spec:
 
 ### <a id='load balancer routing'></a>Layer 4 Approach Using LoadBalancer Service
 
-![Load Balancing](./images/PKS_NSX-T_Load_Balancer.png)
-[View a larger version of this diagram](./images/PKS_NSX-T_Load_Balancer.png).
+![Load Balancing](./images/TKGi_NSX-T_L4_Ingress_Routing.png)
+[View a larger version of this diagram](./images/TKGi_NSX-T_L4_Ingress_Routing.png).
 
 When pushing a Kubernetes deployment with type set to `LoadBalancer`, NSX-T Data Center automatically creates a new VIP for the deployment on the existing load balancer for that namespace. You will need to specify a listening and translation port in the service, along with a name for tagging. You will also specify a protocol to use. Here is an example.
 
