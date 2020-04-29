@@ -1,53 +1,56 @@
 ---
-title: Pivotal Ready Architecture
+title: VMware Tanzu Architecture for Dell EMC VxRail
 owner: Customer[0]
 ---
 
 <strong><%= modified_date %></strong>
 
+<p class="note"><strong>Note</strong>: Pivotal Platform is now part of VMware Tanzu. In v2.3.0 and later, Pivotal Ready Architecture (PRA) is named VMware Tanzu Architecture for Dell EMC VxRail (TA4V).</p>
+
 ## <a id='exe_summary'></a>Executive Summary
 
-Pivotal Ready Architecture (PRA) is an integrated Pivotal Platform environment built on [hyperconverged](https://www.dellemc.com/en-us/converged-infrastructure/hyper-converged-infrastructure.htm) hardware/software infrastructure. It offers high performance potential, convenience, and addresses the challenges of creating, testing, and updating applications in a consolidated production environment.
+VMware Tanzu Architecture for Dell EMC VxRail (TA4V) is an integrated environment built on [hyperconverged](https://www.dellemc.com/en-us/converged-infrastructure/hyper-converged-infrastructure.htm) hardware/software infrastructure. It offers high performance potential, convenience, and addresses the challenges of creating, testing, and updating applications in a consolidated production environment. This represents a validated set of models anyone can adopt to get proven operation and benefits from the combined components. The models are organized as a maturity path: Minimal->Single Cluster->Multiple Cluster.
 
 ## <a id='benefits'></a>Key Benefits
 
-PRA enables you to quickly and reliably create an integrated development platform and provides a variety of deployment options to meet your needs. It is a tested PCF deployment that uses the scalable, hyper-converged Dell EMC VxRail Appliance and VMware vSphere with VMware vSAN and NSX-T Data Center. With PRA, you can deploy a production-ready PAS environment or Enterprise PKS Kubernetes clusters more quickly and more reliably than when using a do-it-yourself approach.
+TA4V enables you to quickly and reliably create an integrated application deployment platform and provides a variety of platform sizes to meet your needs. It is a validated set of models that use the scalable, hyper-converged Dell EMC VxRail Appliance and VMware vSphere with VMware vSAN and NSX-T Data Center products. With TA4V, you can deploy a production-ready app containers environment quickly and reliably compared to a do-it-yourself approach.
 
-The PAS and Enterprise PKS deployments are designed to meet application operational needs. Dell EMC, VMware, and Pivotal Services can help with installing and testing PRA in your IT environment. IT professionals tasked with planning compute, network, and storage capacity can work with Dell EMC Services to determine the sizing requirements for these resources
+The application container deployments are designed to meet application operational needs. Professional Services engagements from Dell EMC and VMware can help with installing and testing TA4V in your IT environment. IT professionals tasked with planning compute, network, and storage capacity can work with Dell EMC Professional Services to determine the sizing requirements for these resources.
 
-PRA enables developers to publish, run, and scale legacy, packaged software, and cloud-native applications. The PRA platform is based on an integrated infrastructure that enables IT operators to easily manage and scale the development environment with tools such as VxRail Manager and PCF Operations Manager.
+TA4V enables developers to quickly publish, run, and scale legacy software, packaged software, and cloud-native applications. The TA4V platform is based on an integrated infrastructure that enables IT operators to easily manage and scale the development environment with tools such as VxRail Manager and Tanzu Operations Manager.
 
-With PRA, you benefit from:
+With TA4V, you benefit from:
 
-* Reference architectures for a variety of highly available Pivotal software deployments
+* Reference architectures for a variety of highly available Tanzu application platforms
 * Private cloud and infrastructure services with simplified deployment
-* Highly available platform on which to develop, and quickly deploy applications, reducing the time for application delivery
-* Modern developer platforms, that boost developer productivity by combining application services, service discovery, container management, and orchestration within an ecosystem of developer tool plug-ins
+* Highly available platform on which to develop and quickly deploy applications, reducing the time for application delivery
+* Modern developer platforms that boost developer productivity by combining application services, service discovery, container management, and orchestration within an ecosystem of developer tool plug-ins
 * Consistent cloud solution, providing increased reliability, portability, and agility
+* Lifecycle management from the lowest level hardware system firmware to the highest level of app container deployment system of choice
 
 ## <a id='bill_of_materials'></a>Versions and Bill of Materials
 
 ### Validated Versions And Interoperability For This Release
 
-This recommended architecture includes VMware vSphere and NSX-T Data Center, a software-defined network virtualization that runs on VMware ESXi hosts and combines routing, firewalling, NAT/SNAT, and load balancing.
+This recommended architecture includes VMware vSphere and NSX-T Data Center, a software-defined network virtualization that runs on VMware ESXi hosts and combines routing, firewalling, NAT/SNAT, and load balancing. It also includes an application container layer from several choices available in the VMware Tanzu portfolio.
 
 #### Supported Software Components For Interoperability
 
 | Software Component|    Version |
 | ------------- | -------------|
-|VxRail HCI System Software|4.7.212 and newer|
-|VMware vSphere ESXi|6.7 express patch 10 GA build 13981272|
-|VMware vCenter (VCSA)|v6.7U2c GA build 14070457|
-|VMware vSAN|v6.7 express patch 10|
-|VMware NSX-T Data Center|2.4.1 and newer|
-|Pivotal Ops Manager|2.6.latest|
-|Pivotal PAS|2.6.latest|
-|Pivotal/VMware Enterprise PKS|1.5.latest|
-|VMware NSX-T Container Plug-in for PCF|2.4.latest|
-|VMware Harbor Registry|1.8.latest|
-|Dell EMC ECS|[untested in this release, planned for next one]|
+|VxRail HCI System Software|4.7.410 and newer|
+|VMware vSphere ESXi|6.7 Patch 01 GA build 15160138|
+|VMware vCenter (VCSA)|6.7 Update 3b GA build 15132721|
+|VMware vSAN|6.7 Patch 01 GA build 15160138|
+|VMware NSX-T Data Center|2.5.1|
+|Ops Manager|2.8.latest|
+|Tanzu Application Service for VMs|2.8.latest|
+|VMware Tanzu Kubernetes Grid Integrated (VMware Enterprise PKS) |1.7.0|
+|VMware NSX-T Container Plug-in for TAS|2.5.1|
+|VMware Harbor Registry|1.10.latest|
+|Dell EMC ECS|3.3.X|
 
-To use all the features listed here, NSX-T Data Center **requires at least Advanced licensing** from VMware when used with PAS. The equivalent of that licensing is included with the Enterprise PKS product.
+To use all the features listed here, NSX-T Data Center **requires at least Advanced licensing** from VMware when used with TAS for VMs. The equivalent of that licensing is included with TKGI.
 
 The following Bill of Materials was used to validate this interoperability matrix. These systems were selected as broadly representative of the common customer installations and do not limit or represent an exhaustive list of possibilities.
 
@@ -56,16 +59,17 @@ The following Bill of Materials was used to validate this interoperability matri
 | Component| Version or Model |
 | ------------- | -------------|
 |VxRail Node Type|E560|
-|VxRail HCI System Software|4.7.212|
-|VxRail BIOS|1.6.12|
-|VxRail iDRAC Firmware|3.32.32.32|
+|VxRail HCI System Software|4.7.410|
+|VxRail BIOS|2.4.8|
+|VxRail iDRAC Firmware|3.36.36.37|
 |VxRail CPU (x2)|Intel(R) Xeon(R) Gold 5120 CPU @ 2.20GHz|
 |VxRail NIC|Intel(R) 10GbE 4P X710 rNDC 4 port|
 |VxRail RAM (x12) per|32GB (x12) DDR-4 2400Mhz|
 |Cache Tier|Toshiba PX05SMB080Y 800GB (x2)|
 |Capacity Tier|Seagate ST2000NX0423 2TB (x4)|
-|VMware NSX-T Data Center|2.4.1|
-|Enterprise PKS|1.5.0|
-|Pivotal Application Service|2.6.4|
-|Pivotal Ops Manager|2.6.7|
-|VMware Harbor Registry|1.8.2|
+|VMware NSX-T Data Center|2.5.1|
+|VMware Tanzu Kubernetes Grid Integrated (VMware Enterprise PKS)|1.7.0|
+|Tanzu Application Service for VMs|2.8.5|
+|Ops Manager|2.8.5|
+|VMware Harbor Registry|1.10.1|
+|Dell EMC ECS|3.3.0|

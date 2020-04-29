@@ -5,21 +5,23 @@ owner: Customer[0]
 
 <strong><%= modified_date %></strong>
 
-## <a id='pas_and_pks'></a>PAS and PKS Installation
+## <a id='summary'></a>Summary
 
-A fully meshed Enterprise PKS and PAS installation based on best practices and reference design considerations will look as follows:
+VMware Tanzu Architecture for Dell EMC VxRail is a carefuly considered, full inclusive and regularly validated approach to using appropriate hardware and software elemnts to produce a highly scalable PaaS installation for today and future growth. The matruity path to follow starts with a minimally viable, low cost platform that features all the capability need for small and remote installations and concludes with an Enterprise-grade, full scale and expandable system that can be grown and upgraded over time without re-architecture. These models can be used and reused over and over around the business as needs arise. You can use these with confidence, as each edition has been fully tested on real world, full scale hardware exactly as described, to operate as described. Every validation cycle includes testing the upgrade path from
 
-![PKS Starter Kit](./images/PRA_PAS_PKS_vSphere_NSX-T_MVP2.png)
-[View a larger version of this diagram](./images/PRA_PAS_PKS_vSphere_NSX-T_MVP2.png).
+## <a id='pas_and_pks'></a>TAS for VMs and TKGI Installation
 
-Common elements are the NSX T0 router and the associated T1 routers. This approach allows for any possible cross traffic between Enterprise PKS and PAS apps to stay within the bounds of the T0 router and not exit the NSX overlay. This also provides a convenient, singular access point to the whole installation, making deployments of multiple, identical installations easier to automate.
+A fully meshed TKGI and TAS for VMs installation based on best practices and reference design considerations will look as follows:
+
+![TKGI Starter Kit](./images/TA4V_TAS_TKGi_vSphere_NSX-T_MVP3.png)
+[View a larger version of this diagram](./images/TA4V_TAS_TKGi_vSphere_NSX-T_MVP3.png).
+
+Common elements are the NSX T0 router and the associated T1 routers. This approach allows for any possible cross traffic between TKGI and TAS for VMs apps to stay within the bounds of the T0 router and not exit the NSX overlay. This also provides a convenient, singular access point to the whole installation, making deployments of multiple, identical installations easier to automate.
 
 ## <a id='further_considerations'></a>Further Considerations
 
-It continues to be a good design choice to use Resource Pools in vSphere Clusters as AZ constructs to stack different installations of PCF. As server capacity continues to increase, the efficiency of deploying independent clusters of a server just for one install of one product is low. As customers are commonly deploying servers approaching 1T of RAM, stacking many PCF installations in these clusters improves overall resource utilization.
+With a single vSphere Cluster, the Host Groups feature introduced in Ops Manager v2.7 can be used in conjuntion with Resource Pools in vSphere Clusters as AZ constructs to stack different installations of PaaS. Host Groups provide a way to pin hardware resources to an AZ, Resource Pools can provide a way to share an aggregate of host resources.
 
-Pay close attention to the maximum configuration maximums allowed per NSX-T Data Center installation. These targets change quickly as the NSX-T evolves, but you may find that a NSX-T Data Center installation per deployment potentially consumes all of the capacity of a NSX install (not a vSphere install). It’s reasonable to consider a NSX-T Data Center installation per deployment to allow maximum capacity growth.
+As server capacity continues to increase, the efficiency of deploying independent clusters of a server just for one install of one product is low. As customers are commonly deploying servers approaching 1T of RAM, stacking many installations in these clusters improves overall resource utilization.
 
-You may be tempted to split the PAS and Enterprise PKS installations into separate network parent/child configurations, behind separate T0 routers. Before doing this, review [VMware’s best practices](https://www.vmware.com/support/pubs/vmware-validated-design-pubs.html) for T0 to T0 routing efficiencies and weaknesses to ensure that approach meets your needs.
-
-Please review the reference guidance from VMware for this solution, which is much more detailed in the IaaS constructs than shown [here](https://communities.vmware.com/docs/DOC-38609).
+You may be tempted to split the TAS for VMs and TKGI installations into separate network parent/child configurations, behind separate T0 routers. Before doing this, review [VMware's best practices](https://www.vmware.com/support/pubs/vmware-validated-design-pubs.html) for T0 to T0 routing efficiencies and weaknesses to ensure that approach meets your needs.

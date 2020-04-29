@@ -7,48 +7,25 @@ owner: Customer[0]
 
 ## <a id='nsxt_lb'></a>NSX-T Data Center Edge Type and Load Balancer capacity planning
 
-|Edge Node|LB Small|LB Medium|LB Large|
-|---------|---------|--------|--------|
-|**NSX-T Data Center release**|**2.4**|**2.4**|**2.4**|
-|Edge VM - Small (not recommended)|-|-|-|
-|Edge VM - Medium (not recommended)|1|-|-|
-|Edge VM - Large|40|4|1|
-|Edge Bare Metal|750|75|18|
+It is recommended to use a minimum of four large Edge VMs in a configuration of two active-standby pairs (at least two instances are necessary for HA) to have a sufficient number of available load balancer instances. This offers a budget of two large load balancer instances. A production grade deployment should only use large load balancers.
 
-It is recommended to use a minimum of four large Edge VMs (two instances are minimal and necessary for HA) to have a sufficient number of available load balancer instances, which creates a budget of two large load balancer instances. A production grade deployment should use large load balancers. Even though there might be 40 small sized load balancers available on a large Edge VM, only the large sized load balancers are recommended for a production environment.
+They type of Edge deployment is up to you based on your needs and capacity. Edges as VMs offers maximum flexibility and use of the physical resources but the limits on bare metal Edges is far higher. Since TA4A is a "hyperconverged" or "collapsed" model, the approach of using VMs for Edges is a natural fit. VMware recommends starting with Edges as VMs until the system capacity is exhausted, then adding bare-metal Edes or more virtualized capacity for Edge VMs as necessary.
 
-The size of the load balancer determines the number of Virtual Servers, Pools, and Pool Members per LB instance.
+Introduced in NSX-T 2.5, users can assign edges to defined fault domains. When TKGI provisions load balancer T1 routers, the active and passive edges are assigned on separate zones automatically, which increases the resiliency.
 
-|LB Service|Large|
-|---------|--------|
-|**NSX-T Data Center release**|**2.4**|
-|# of Virtual Servers per LB|1000|
-|# of Pools per LB|3000|
-|# of Pool Members per LB|7500|
+The size of the load balancer determines the number of Virtual Servers, Pools, and Pool Members per LB instance. Learn more about [configuration maximums at VMware's Configuration Maximums site](https://configmax.vmware.com/home)
 
-**Important Note**: Since PAS and Enterprise PKS use active/standby Edge Node LB Service, one would always need to consider capacity as per Edge pair to derive the available number of Load Balancer Services. If there are two Edge servers, only the Load Balancer Service capacity of one instance can be taken into consideration as the other is treated as stand-by.
-
-The following table shows the capacity for two instances of large Edge VM as four for medium sized load balancers even though each Edge instance itself does have four load balance instance capacity.
-
-|Edge Cluster|LB Small|LB Medium|LB Large|
-|---------|---------|--------|--------|
-|**NSX-T Data Center release**|**2.4**|**2.4**|**2.4**|
-|2x Edge VM - Large|40|4|1|
-|4x Edge VM - Large|80|8|2|
-|8x Edge VM - Large|160|16|4|
-|2x Edge Bare Metal|750|75|18|
-|4x Edge Bare Metal|1500|150|36|
-|8x Edge Bare Metal|3000|300|72|
+**Important Note**: Since TAS for VMs and TKGI use active/standby Edge Node Load Balancer Service, one would always need to consider capacity as per Edge pair to derive the available number of Load Balancer Services. If there are two Edge servers, only the Load Balancer Service capacity of one instance can be taken into consideration as the other is treated as stand-by.
 
 The number of available Load Balancer instances is directly proportional (1:1) to the maximum number of Kubernetes clusters that can be supported. Each Kubernetes cluster would use minimum of one load balancer from an active Edge instance. Based on the type of load balancer and the Edge, the load balancer instances are fixed. As such, the resulting number of Kubernetes clusters created on the edge are also constrained by the number of free loadbalancer services on the active Edge.
 
-**Note**: Maximum number of Edge nodes per Edge Cluster is 10 (as of NSX-T Data Center 2.4). If the number of Edge nodes is greater than 10, create additional Edge clusters. If the Load Balancer service capacity is fully utilized on a given Edge pair, then install and bring up additional Edge VM instance pairs in the same Edge Cluster to handle requirements for additional load balancers (for existing or new Enterprise PKS clusters).
+**Note**: Maximum number of Edge nodes per Edge Cluster is 10 (as of NSX-T Data Center 2.5). If the number of Edge nodes is greater than 10, create additional Edge clusters. If the Load Balancer service capacity is fully utilized on a given Edge pair, then install and bring up additional Edge VM instance pairs in the same Edge Cluster to handle requirements for additional load balancers (for existing or new TKGI clusters).
 
-Learn more about [configuration maximums at VMware's configmax tool](https://configmax.vmware.com/home)
+Learn more about [configuration maximums at VMware's Configuration Maximums site](https://configmax.vmware.com/home)
 
-## <a id='PKS NSX-T integration'></a> PKS NSX-T Container Plugin for ingress traffic
+## <a id='PKS NSX-T integration'></a> TKGI NSX-T Container Plugin for ingress traffic
 
-There is no native way to reach the apps you will place in Enterprise PKS, one must be selected and deployed. What you select influences load balancing choices. Kubernetes has three ways for external users to access services running in a Kubernetes cluster:
+There is no native way to reach the apps you will place in TKGI, one must be selected and deployed. What you select influences load balancing choices. Kubernetes has three ways for external users to access services running in a Kubernetes cluster:
 
 * [NodePort](https://kubernetes.io/docs/concepts/services-networking/service/#nodeport)
 * [Ingress Controller](https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer)
@@ -56,9 +33,9 @@ There is no native way to reach the apps you will place in Enterprise PKS, one m
 
 NSX-T Load Balancer supports both layer 4 and layer 7 ingress traffic, as well as SSL encryption
 
-PKS NSX-T container plugin integrates with NSX-T Load Balancer, that Kubernetes operator can interface with Kubernetes resources (ingress controller and load balancer) to provision/configure NSX-T Load Balancer.
+TKGI NSX-T container plugin integrates with NSX-T Load Balancer, that Kubernetes operator can interface with Kubernetes resources (ingress controller and load balancer) to provision/configure NSX-T Load Balancer.
 
-The Benefits of PKS NCP + NSX-T integration:
+The Benefits of TKGI NCP + NSX-T integration:
 
 * Kubernetes users only needs to interface Kubernetes resources rather than lower level network infrastructure
 * NSX-T Load Balancer provisioning & configuration setup automatically:
@@ -68,24 +45,24 @@ The Benefits of PKS NCP + NSX-T integration:
 
 Your choice is to select a layer 4 or layer 7 approach; each will be described here. A layer 4 approach is a good choice TCP-bound traffic types and layer 7 is best for HTTP-bound traffic types to/from the app.
 
-## <a id='PKS Routing'></a>Ingress Controller and Load Balancing for Enterprise PKS
+## <a id='PKS Routing'></a>Ingress Controller and Load Balancing for TKGI
 
 ### <a id='ingress routing'></a>Layer 7 Approach Using Ingress Controller
 
-![Ingress Controller](./images/PKS_NSX-T_Ingress_Routing.png)
-[View a larger version of this diagram](./images/PKS_NSX-T_Ingress_Routing.png).
+![Ingress Controller](./images/TKGi_NSX-T_L7_Ingress_Routing.png)
+[View a larger version of this diagram](./images/TKGi_NSX-T_L7_Ingress_Routing.png).
 
 Domain info for ingress is defined in the manifest of the Kubernetes deployment. Here is an example.
 
 ```
-apiVersion: extensions/v1beta1
+apiVersion: extensions/v1
 kind: Ingress
 metadata:
   name: music-ingress
   namespace: music1
 spec:
   rules:
-  - host: music1.Enterprise_PKS.domain.com
+  - host: music1.tkgi.domain.com
     http:
       paths:
       - path: /.*
@@ -94,17 +71,14 @@ spec:
           servicePort: 8080
 ```
 
-Describe this ^^^ with SSL integration/configuration.
-
 ### <a id='load balancer routing'></a>Layer 4 Approach Using LoadBalancer Service
 
-![Load Balancing](./images/PKS_NSX-T_Load_Balancer.png)
-[View a larger version of this diagram](./images/PKS_NSX-T_Load_Balancer.png).
+![Load Balancing](./images/TKGi_NSX-T_L4_Ingress_Routing.png)
+[View a larger version of this diagram](./images/TKGi_NSX-T_L4_Ingress_Routing.png).
 
 When pushing a Kubernetes deployment with type set to `LoadBalancer`, NSX-T Data Center automatically creates a new VIP for the deployment on the existing load balancer for that namespace. You will need to specify a listening and translation port in the service, along with a name for tagging. You will also specify a protocol to use. Here is an example.
 
 ```
-
 apiVersion: v1
 kind: Service
 metadata:
