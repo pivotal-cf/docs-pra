@@ -35,6 +35,12 @@ For PAS production-level deployments, Dell EMC and Pivotal recommend using an ex
 
 Enterprise PKS manages multiple Kubernetes clusters, while each cluster storage requirement depends on the size of the cluster and applications. [Enterprise PKS Documentation](https://docs.pivotal.io/pks/1-4/volumes.html) has a detailed guidance on Enterprise PKS storage requirements.
 
+With Dell EMC ECS, VMware recommends that you use unversioned buckets for file storage
+by clearing the **Use versioning for backup and restore** checkbox in the
+**File Storage** pane of the TAS for VMs tile.
+For information, see _Step 3: Configure PAS File Storage_ in [this Dell EMC ECS whitepaper](https://www.dellemc.com/resources/en-us/asset/white-papers/products/storage/h17569_wp_ecs_with_pivotal_cloud_foundry_config_guide_and_best_practices.pdf).
+You can use mirroring as an alternative to versioning.
+
 Enterprise PKS storage options to support stateful apps include:
 
 * vSAN datastores
