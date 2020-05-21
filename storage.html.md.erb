@@ -36,6 +36,13 @@ Dell EMC ECS object storage features a flexible software-defined architecture th
 
 TA4V can use the ECS platform as its blobstore location to store application code, buildpacks, and applications. The blobstore uses the S3 protocol and can be managed by ECS nodes. The ECS platform provides software-defined object storage that is designed for modern cloud-scale storage requirements.
 
+With Dell EMC ECS, VMware recommends that you use unversioned buckets for file storage
+by clearing the **Use versioning for backup and restore** checkbox in the
+**File Storage** pane of the TAS for VMs tile.
+For information, see _Step 3: Configure PAS File Storage_ in [this Dell EMC ECS whitepaper](https://www.dellemc.com/resources/en-us/asset/white-papers/products/storage/h17569_wp_ecs_with_pivotal_cloud_foundry_config_guide_and_best_practices.pdf).
+You can use mirroring as an alternative to versioning.
+
+
 ### <a id='virtual_stream_storage'></a>Virtustream Storage Cloud
 
 Virtustream Storage Cloud is a hyper-scale, enterprise-class, public cloud object storage platform, built for resiliency and performance. Virtustream provides a unique value proposition with enterprise-class off-premises primary and backup storage.
