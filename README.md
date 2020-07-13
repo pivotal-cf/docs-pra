@@ -7,9 +7,13 @@ Docs for VMware Tanzu Architecture for Dell EMC VxRail, formerly known as Pivota
 
 **Note**: Provide instructions in your PRs to indicate which branches you want Docs to apply your commits to.
 
+DO NOT USE MASTER BRANCH.
+
 | Branch name | Use for… |
 |-------------| -------|
-| master      | "edge" branch for 2.x, publishes to https://docs-pcf-staging.cfapps.io/pra/2-n|
+| Master      | Not used except for this README |
+| v3.0.x      | v3.0.x publishes to https://docs-pcf-staging.cfapps.io/pra/3-0|
+| v2.4.x      | v2.4.0 |
 | v2.3.x      | v2.3.0 |
 | v2.2.x      | v2.2.0 |
 | v2.1.x      | v2.1.0 |
