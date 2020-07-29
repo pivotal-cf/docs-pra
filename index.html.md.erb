@@ -5,8 +5,6 @@ owner: Customer[0]
 
 <strong><%= modified_date %></strong>
 
-<p class="note"><strong>Note</strong>: Pivotal Platform is now part of VMware Tanzu. In v2.3.0 and later, Pivotal Ready Architecture (PRA) is named VMware Tanzu Architecture for Dell EMC VxRail (TA4V).</p>
-
 ## <a id='exe_summary'></a>Executive Summary
 
 VMware Tanzu Architecture for Dell EMC VxRail (TA4V) is an integrated environment built on [hyperconverged](https://www.dellemc.com/en-us/converged-infrastructure/hyper-converged-infrastructure.htm) hardware/software infrastructure. It offers high performance potential, convenience, and addresses the challenges of creating, testing, and updating applications in a consolidated production environment. This represents a validated set of models anyone can adopt to get proven operation and benefits from the combined components. The models are organized as a maturity path: Minimal->Single Cluster->Multiple Cluster.
@@ -39,14 +37,14 @@ This recommended architecture includes VMware vSphere and NSX-T Data Center, a s
 | Software Component|    Version |
 | ------------- | -------------|
 |VxRail HCI System Software|4.7.510 and newer|
-|VMware vSphere ESXi|6.7 Patch 01 GA build 15160138|
-|VMware vCenter (VCSA)|6.7 Update 3b GA build 15132721|
-|VMware vSAN|6.7 Patch 01 GA build 15160138|
+|VMware vSphere ESXi|6.7 Patch 02 GA build 16075168|
+|VMware vCenter (VCSA)|6.7 U3g GA build 16046470|
+|VMware vSAN|vSAN 6.7 Patch 02|
 |VMware NSX-T Data Center|2.5.1|
-|Ops Manager|2.8.latest|
-|Tanzu Application Service for VMs|2.8.latest|
-|VMware Tanzu Kubernetes Grid Integrated (VMware Enterprise PKS) |1.7.0|
-|VMware NSX-T Container Plug-in for TAS|2.5.1|
+|Ops Manager|2.9.latest|
+|Tanzu Application Service for VMs|2.9.latest|
+|VMware Tanzu Kubernetes Grid Integrated (VMware Enterprise PKS) |1.8.latest|
+|VMware NSX-T Container Plug-in for TAS|3.0.1|
 |VMware Harbor Registry|1.10.latest|
 |Dell EMC ECS|3.3.X|
 
@@ -59,9 +57,9 @@ The following Bill of Materials was used to validate this interoperability matri
 | Component| Version or Model |
 | ------------- | -------------|
 |VxRail Node Type|E560|
-|VxRail HCI System Software|4.7.410|
-|VxRail BIOS|2.4.8|
-|VxRail iDRAC Firmware|3.36.36.37|
+|VxRail HCI System Software|4.7.510|
+|VxRail BIOS|2.6.4|
+|VxRail iDRAC Firmware|4.10.10.10|
 |VxRail CPU (x2)|Intel(R) Xeon(R) Gold 5120 CPU @ 2.20GHz|
 |VxRail NIC|Intel(R) 10GbE 4P X710 rNDC 4 port|
 |VxRail RAM (x12) per|32GB (x12) DDR-4 2400Mhz|
@@ -69,7 +67,9 @@ The following Bill of Materials was used to validate this interoperability matri
 |Capacity Tier|Seagate ST2000NX0423 2TB (x4)|
 |VMware NSX-T Data Center|2.5.1|
 |VMware Tanzu Kubernetes Grid Integrated (VMware Enterprise PKS)|1.7.0|
-|Tanzu Application Service for VMs|2.8.5|
-|Ops Manager|2.8.5|
-|VMware Harbor Registry|1.10.1|
+|Tanzu Application Service for VMs|2.9.5|
+|Ops Manager|2.9.5|
+|VMware Harbor Registry|1.10.3|
 |Dell EMC ECS|3.3.0|
+
+<p class="note"><strong>NCP 3.0.1 and Stemcell incompatibility: </strong>Both TAS and TKGI in this release use NCP 3.0.1 and it is not compatible with bosh stemcell 621.76+ and Ops Manager 2.9.6. Please refer to the product release notes and fix before upgrading Ops Manager beyond 2.9.6</p>
