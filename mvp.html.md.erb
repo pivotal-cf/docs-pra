@@ -14,8 +14,8 @@ Starter Kit Applied to TAS for VMs
 [View a larger version of this diagram](./images/TA4V_TAS4VMs_vSphere_NSX-T_MVP1.png).
 
 Starter Kit Applied to TKGI
-![TKGi Starter Kit](./images/TA4V_TKGi_vSphere_NSX-T_MVP1.png)
-[View a larger version of this diagram](./images/TA4V_TKGi_vSphere_NSX-T_MVP1.png).
+![TKGi Starter Kit](./images/TA4V_TKGi_vSphere_NSX-T_MVP1_Shared_T1.png)
+[View a larger version of this diagram](./images/TA4V_TKGi_vSphere_NSX-T_MVP1_Shared_T1.png).
 
 **This configuration includes the following key components:**
 
@@ -34,7 +34,7 @@ Starter Kit Applied to TKGI
 * Storage is purposely kept simple for stable operation during service outages, patching or unplanned outages
 * A single host can be out of service at any one time but no more for normal operations
 
-Also consider that vSphere DRS (Dynamic Resource Scheduling) can be applied to steer VMs either apart from each other (anti-affinity) or to each other (affinity). DRS can be used to push jobs apart that you want to make sure survive an outage, such as Gorouters. 
+Also consider that vSphere DRS (Dynamic Resource Scheduling) can be applied to steer VMs either apart from each other (anti-affinity) or to each other (affinity). DRS can be used to push jobs apart that you want to make sure survive an outage, such as Gorouters.
 
 When using DRS, we recommend using the "should" rule vs the "must" rule. This will allow VMs that violate the DRS rule to power on anyway as opposed to being denied power on. For example, you have three AZs and eleven Gorouters. With a DRS anti-affinity "should" rule they will deploy on each server separately and then overlap but all power on. With the "must" rule, only four will power on and the others will not, as they can not be placed on a server away from the others.
 
