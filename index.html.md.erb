@@ -7,13 +7,13 @@ owner: Customer[0]
 
 ## <a id='exe_summary'></a>Executive Summary
 
-VMware Tanzu Architecture for Dell EMC VxRail (TA4V) is an integrated environment built on [hyperconverged](https://www.dellemc.com/en-us/converged-infrastructure/hyper-converged-infrastructure.htm) hardware/software infrastructure. It offers you high performance potential, convenience, and it addresses the challenges of creating, testing, and updating applications in a consolidated production environment. This represents a choice of validated architectures anyone can adopt to get proven operational benefits. The architectures are organized to provide a pathway for growing your environment from a minimal single cluster system to a multiple cluster architecture.
+VMware Tanzu Architecture for Dell EMC VxRail (TA4V) is an integrated environment built on [hyperconverged](https://www.dellemc.com/en-us/converged-infrastructure/hyper-converged-infrastructure.htm) hardware/software infrastructure. It offers you high performance potential, convenience, and it addresses the challenges of creating, testing, and updating applications in a consolidated production environment. This describes a set of validated architectures anyone can adopt to get proven operational benefits. The architectures are organized to provide a pathway for growing your environment from a minimal single cluster system to a multiple cluster architecture.
 
 ## <a id='benefits'></a>Key Benefits
 
-TA4V enables you to quickly and reliably create an integrated application deployment platform and provides a variety of platform sizes to meet your needs. It is a validated set of architectures that use the scalable, hyper-converged Dell EMC VxRail Appliance along with VMware vSphere, VMware vSAN and NSX-T Data Center products. With TA4V, you can deploy production-ready application container environments quickly and reliably compared to a build-it-yourself approach.
+TA4V enables you to quickly and reliably create an integrated application deployment platform and provides a variety of platform sizes to meet your needs. It is a validated set of architectures that recommands the scalable, hyper-converged Dell EMC VxRail Appliance along with VMware vSphere, VMware vSAN and NSX-T Data Center products. With TA4V, you can deploy production-ready application container environments quickly and reliably compared to a build-it-yourself approach.
 
-Several application container technologies such as TKG and TAS, are designed to meet application operational needs. Professional Services engagements from Dell EMC and VMware can help with installing and testing TA4V in your IT environment. Your IT professionals who are tasked with planning compute, network, and storage capacity can work with Dell EMC Professional Services to determine the requirements for these resources.
+Several application container technologies such as TKG and TAS, are designed to meet application operational needs. Professional Services engagements from Dell EMC and VMware can help you install and test TA4V in your IT environment. Your IT professionals who are tasked with planning compute, network, and storage capacity can work with Dell EMC Professional Services to determine the requirements for these resources.
 
 TA4V enables developers to quickly publish, run, and scale legacy software, packaged software, and cloud-native applications. The TA4V platform is based on an integrated infrastructure that enables IT operators to easily manage and scale the development environment with tools such as VxRail Manager and Tanzu Operations Manager.
 
@@ -39,12 +39,12 @@ This recommended architecture includes VMware vSphere and NSX-T Data Center, a s
 |VxRail HCI System Software|4.7.510 and newer|
 |VMware vSphere ESXi|6.7 Patch 02 GA build 16075168|
 |VMware vCenter (VCSA)|6.7 U3g GA build 16046470|
-|VMware vSAN|vSAN 6.7 Patch 02|
+|VMware vSAN|6.7 Patch 02|
 |VMware NSX-T Data Center|2.5.1|
-|Ops Manager|2.9.latest|
-|Tanzu Application Service for VMs|2.9.latest|
-|VMware Tanzu Kubernetes Grid Integrated (VMware Enterprise PKS) |1.8.latest|
-|VMware NSX-T Container Plug-in for TAS|3.0.1|
+|VMware NSX-T Container Plug-in (NCP)|3.0.1|
+|Operations Manager|2.9.latest|
+|VMware Tanzu Kubernetes Grid Integrated (TKGI) |1.8.latest|
+|Tanzu Application Service (TAS)|2.9.latest|
 |VMware Harbor Registry|1.10.latest|
 |Dell EMC ECS|3.3.X|
 
@@ -66,10 +66,11 @@ The following Bill of Materials (BOM) along with sample applications, was used t
 |Cache Tier|Toshiba PX05SMB080Y 800GB (x2)|
 |Capacity Tier|Seagate ST2000NX0423 2TB (x4)|
 |VMware NSX-T Data Center|2.5.1|
-|VMware Tanzu Kubernetes Grid Integrated (VMware Enterprise PKS)|1.7.0|
-|Tanzu Application Service for VMs|2.9.5|
-|Ops Manager|2.9.5|
+|VMware NSX-T Container Plug-in (NCP)|3.0.1|
+|Operations Manager|2.9.5|
+|VMware Tanzu Kubernetes Grid Integrated (TKGI)|1.7.0|
+|Tanzu Application Service (TAS)|2.9.5|
 |VMware Harbor Registry|1.10.3|
 |Dell EMC ECS|3.3.0|
 
-<p class="note"><strong>NCP 3.0.1 and Stemcell incompatibility: </strong>Both TAS and TKGI in this release use NCP 3.0.1 and it is not compatible with bosh stemcell 621.76+ and Ops Manager 2.9.6. Please refer to the product release notes and fix before upgrading Ops Manager beyond 2.9.6</p>
+<p class="note"><strong>NCP 3.0.1 and Stemcell incompatibility: </strong>Both TAS and TKGI in this release use NCP 3.0.1 and it is not compatible with bosh stemcell 621.76+ and Operations Manager 2.9.6. Please refer to the product release notes and fix before upgrading Operations Manager beyond 2.9.6</p>
