@@ -7,7 +7,19 @@ owner: Customer[0]
 
 ## <a id='summary'></a>Summary
 
-VMware Tanzu Architecture for Dell EMC VxRail is a carefuly considered, full inclusive and regularly validated approach to using appropriate hardware and software elemnts to produce a highly scalable PaaS installation for today and future growth. The matruity path to follow starts with a minimally viable, low cost platform that features all the capability need for small and remote installations and concludes with an Enterprise-grade, full scale and expandable system that can be grown and upgraded over time without re-architecture. These models can be used and reused over and over around the business as needs arise. You can use these with confidence, as each edition has been fully tested on real world, full scale hardware exactly as described, to operate as described. Every validation cycle includes testing the upgrade path from
+VMware Tanzu Architecture for Dell EMC VxRail is a carefuly considered, 
+fully inclusive and regularly validated approach to using appropriate 
+hardware and software elemnts to produce a highly scalable PaaS installation 
+for today and into the future as you grow your system. 
+The maturity path to follow starts with a minimally viable, low cost platform 
+that features all the capability needed for small and remote installations 
+and concludes with an Enterprise-grade, full scale and expandable system 
+that can be grown and upgraded over time without re-architecture. 
+These models can be used and reused over and over around the business as needs arise. 
+You can use these with confidence, as each edition has been fully tested on real world, 
+full scale hardware exactly as described. You can be confident that it will operate as described. 
+Every validation cycle includes testing the upgrade procedure
+and tests the target platform for functionality and performance.
 
 ## <a id='pas_and_pks'></a>TAS for VMs and TKGI Installation
 
@@ -16,11 +28,11 @@ A fully meshed TKGI and TAS for VMs installation based on best practices and ref
 ![TKGI Starter Kit](./images/TA4V_TAS_TKGi_vSphere_NSX-T_MVP3.png)
 [View a larger version of this diagram](./images/TA4V_TAS_TKGi_vSphere_NSX-T_MVP3.png).
 
-Common elements are the NSX T0 router and the associated T1 routers. This approach allows for any possible cross traffic between TKGI and TAS for VMs apps to stay within the bounds of the T0 router and not exit the NSX overlay. This also provides a convenient, singular access point to the whole installation, making deployments of multiple, identical installations easier to automate.
+The common elements of these two platform technologies are the NSX T0 router and the associated T1 routers. This approach allows for any possible cross traffic between TKGI and TAS for VMs applications to stay within the bounds of the T0 router. Cross traffic does not need to exit the NSX overlay. This also provides a convenient, singular access point to the whole installation, making deployments of multiple, identical installations easier to automate.
 
 ## <a id='further_considerations'></a>Further Considerations
 
-With a single vSphere Cluster, the Host Groups feature introduced in Ops Manager v2.7 can be used in conjuntion with Resource Pools in vSphere Clusters as AZ constructs to stack different installations of PaaS. Host Groups provide a way to pin hardware resources to an AZ, Resource Pools can provide a way to share an aggregate of host resources.
+With a single vSphere Cluster, the Host Groups feature introduced in Ops Manager v2.7 can be used in conjuntion with Resource Pools in vSphere Clusters as AZ constructs to stack different installations of PaaS. Host Groups provide a way to pin hardware resources to an AZ. Resource Pools provides a way to aggregate host resources.
 
 As server capacity continues to increase, the efficiency of deploying independent clusters of a server just for one install of one product is low. As customers are commonly deploying servers approaching 1T of RAM, stacking many installations in these clusters improves overall resource utilization.
 
