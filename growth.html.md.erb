@@ -12,7 +12,7 @@ Organic growth from the Minimal Viable Platform (MVP) to a more complex system i
 ![Across Racks](./images/TA4V_TAS4VMs_vSphere_NSX-T_MVP1_racks.png)
 [View a larger version of this diagram](./images/TA4V_TAS4VMs_vSphere_NSX-T_MVP1_racks.png).
 
-This second stage design improves upon the capacity of the system and the resiliency of the storage system.
+This second stage design (MVP2) improves upon the capacity of the system and the resiliency of the storage system.
 
 **Key items that change are:**
 
@@ -24,7 +24,15 @@ The maximum number of hosts per cluster for this architecture increases from 64 
 
 * Management functions do not change location
 
-By transforming into a three rack configuration, several HA features from different parts of the configuration align. Each pair of hosts in a rack can be designated a [vSAN fault domain](https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.vsan.doc/GUID-8491C4B0-6F94-4023-8C7A-FD7B40D0368D.html). If your vSAN cluster spans across multiple racks or blade server chassis, you can use Fault Domains to protect shared storage against rack or chassis failure. With fault domains, when you add one or more hosts to each fault domain you increase the high availability of shared storage which is a key contributor to improved platform resiliency. This is a significant improvement of the shared storage HA solution.
+By transforming into a three rack configuration, 
+several HA features from different parts of the configuration align. 
+Each pair of hosts in a rack can be designated a [vSAN fault domain](https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.vsan.doc/GUID-8491C4B0-6F94-4023-8C7A-FD7B40D0368D.html). 
+If your vSAN cluster spans across multiple racks or blade server chassis, 
+you can use Fault Domains to protect shared storage against rack or chassis failure. 
+With fault domains, when you add one or more hosts to each fault domain 
+you increase the high availability of shared storage which is a key contributor 
+to improved platform resiliency. 
+This shared storage HA solution is a significant improvement.
 
 vSphere Host Groups are defined which align to the three racks of hosts which then comprise three Availability Zones. These Availability Zones are then exploited by TAS for VMs and TKGI to improve resiliency. The Host Groups feature is a great way to pin the application containers resource usage to an aggregation of computing power and memory that is cluster-aligned without having to manually balance the entire cluster. This is akin to using Resource Pools in the cluster but without having to sub-segment the available computing power and memory using shares.
 
@@ -38,7 +46,7 @@ TA4V Multiple Cluster Design
 ![clusters](./images/TA4V_vSphere_3Cluster_AZs_Only.png)
 [View a larger version of this diagram](./images/TA4V_vSphere_3Cluster_AZs_Only.png).
 
-This third stage design is production-ready with ample high availability and redundant capacity for full-time Enterprise use. This size is appropriate for combined TKGI and TAS for VMs deployments. if required, you may use host groups (or Resource Pools with/without host groups) to organize components within the clusters capacity. There is no practical reason to scale horizontally (more clusters/AZs) from this model as the upper limits of aggregate compute & memory far exceed the capability of the software components that make it up. If true exascale capacity is desired, a better approach is to deploy three of these models in parallel as opposed to one, bigger one.
+This third stage design (MVP3) is production-ready with ample high availability and redundant capacity for full-time Enterprise use. This size is appropriate for combined TKGI and TAS for VMs deployments. if required, you may use host groups (or Resource Pools with or without host groups) to organize components within the clusters capacity. There is no practical reason to scale horizontally (more clusters/AZs) from this model as the upper limits of aggregate compute & memory far exceed the capability of the software components that make it up. If true exascale capacity is desired, a better approach is to deploy three of these models in parallel as opposed to one, bigger one.
 
 **Key items that change are:**
 
@@ -50,7 +58,7 @@ This third stage design is production-ready with ample high availability and red
 
 Migration from the MVP1 model to this multi-cluster architecture directly will be a challenge, as all management VMs from vSphere, NSX-T Data Center and PaaS will be migrated to a dedicated cluster and not blended in with any of the application containers running on TKGI and TAS for VMs. A fresh installation of the PaaS layer (at least) makes this model the easiest to install, as it will give you the opportunity to place management components in the management cluster and evacuate any pre-existing clusters of anything other than application components.
 
-Migrating from the Single Cluster/Three Racks (MVP2) model to this one will also include challenges with relocating management functions from the application cluster to the new management cluster. This can be accomplished as long as there are shared networks and storage between the current management cluster and the new management cluster. The new management cluster should be built so that you can use vMotion and storage-vMotions to migrate objects to the new management cluster. Or, a consolidation of all management functions onto a single rack's hosts prior to addition of new capacity could be accomplished. The approach is to evacuate all management functions from the existing racks targeted for payloads in favor of placement on the new management cluster. How best to accomplished this is dependent upon the architecture of your current environment.
+Migrating from the Single Cluster/Three Racks (MVP2) model to this one will also include challenges with relocating management functions from the application cluster to the new management cluster. This can be accomplished as long as there are shared networks and storage between the current management cluster and the new management cluster. The new management cluster should be built so that you can use vMotion and storage-vMotion to migrate objects to the new management cluster. Or, a consolidation of all management functions onto a single rack's hosts prior to addition of new capacity could be accomplished. The approach is to evacuate all management functions from the existing racks targeted for applications in favor of placement on the new management cluster. How best to accomplish this is dependent upon the architecture of your current environment.
 
 ## <a id='TKGI_multiple_cluster'></a>TKGI Multiple Cluster Design
 
