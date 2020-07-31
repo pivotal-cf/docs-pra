@@ -12,27 +12,29 @@ TA4V is based on VxRail hyper-converged infrastructure (HCI) hardware from Dell 
 
 Further, VxRail establishes a lifecycle management system to keep the clusters hardware patched, current with VMware releases through further automation.
 
-Overall, the purview of VxRail HCI System Software is to take servers in a raw state and deliver a fully paved vSphere installation, complete with vCenter Server managing cluster(s), vSAN shared storage and related constructs.
+Overall, the purview of VxRail HCI System Software is to take servers in a raw state and deliver a fully paved vSphere installation, complete with vCenter Server management cluster(s), vSAN shared storage and related constructs.
 
 ## <a id='nsx-t'></a>VMware NSX-T Data Center Software Defined Networking
 
-Virtualized, software-defined networking is a core concept leveraged by the TA4V solution. This important infrastructure layer brings maximum flexibility and growth potential for TA4V from small to large systems. NSX-T Data Center brings a few key technologies into play that benefit the solution:
+Virtualized, software-defined networking is a core concept leveraged by the TA4V solution. This important infrastructure layer brings maximum flexibility and growth potential to TA4V. You can transform a small system into a large system without having to rebuild the entire platform. 
+
+NSX-T Data Center brings many important capabilities to the platform. For example, you will benefit from:
 
 * Tunneled networks of near-infinite capacity for Orgs, Namespaces and Apps to use
 * Bridged interfaces to the datacenter network core that can be expanded and clustered for speed, capacity and redundancy
-* Routing interfaces that are defined and deployed logically for a variety of needs to meet Org, Namespace and App needs, including routing directly to the app container
+* Routing interfaces that are defined and deployed logically for a variety of needs to meet Org, Namespace and App needs, including routing directly to application containers
 * Load balancing logical instances for Apps and Namespaces on-demand
 
-The Enterprise PKS software has native support for NSX-T Data Center built into the product and requires an NSX-T Data Center installation to be complete prior to use. TAS for VMs software is also compatible with NSX-T Data Center but does not strictly require its presence.
+The Enterprise PKS software has native support for NSX-T Data Center built into the product and requires an NSX-T Data Center installation to be completed prior to use. TAS for VMs software is also compatible with NSX-T Data Center but does not strictly require its presence.
 
 ## <a id='nsx-t'></a>Architecture Review
 
-The overall architecture to TA4V is as follows (bottom up view):
+The overall architecture of TA4V is as follows (bottom up view):
 
 * A VxRail HCI cluster, or series of clusters, are organized using VxRail Manager
-* vSphere is paved onto the cluster(s) via VxRail Manager
-* A vSAN shared storage target is organized from local disks in each server per cluster
+* vSphere is paved into cluster(s) via VxRail Manager
+* A vSAN shared storage target in every cluster is created from local disks of every server in the cluster
 * NSX-T Data Center is layered on and a routed interface to the datacenter is established
-* The container platform of choice is layered over the payload cluster(s) and interfaced with NSX-T Data Center for dynamic deployment of networks, routers and load balancers
+* The container platform of choice is layered onto the compute cluster(s) and interfaced with NSX-T Data Center for dynamic deployment of networks, routers and load balancers
 
-All of these components build on each other to establish a horizontally-scalable - via host addition to a new or existing cluster - and vertically-scalable - via memory/disk/network addition to existing hosts -  container-ready system that is self-contained and self-healing.
+All of these components work together to establish a horizontally-scalable (via adding hosts to a cluster) and vertically-scalable (via adding memory/disk/network to cluster hosts) container-ready system that is self-contained and self-healing.
