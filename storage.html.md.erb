@@ -7,17 +7,21 @@ owner: Customer[0]
 
 ## <a id='TKGi_storage'></a>Kubernetes Storage Considerations (TKGI Storage)
 
-TKGI manages multiple Kubernetes clusters spaced across multiple vSphere clusters. Each kubernetes cluster's storage requirements depend on the size of the cluster and applications deployed. Detailed guidance on these storage requirements can be found in the [TKGI Documentation](https://docs.pivotal.io/pks/1-7/volumes.html).
+TKGI can be used to manage multiple Kubernetes clusters distributed across multiple vSphere clusters. Each kubernetes cluster's storage requirements are determined from the applications planned but are limited by the size of the cluster. Detailed guidance on how to configure and manage storage can be found in the [TKGI Documentation](https://docs.pivotal.io/pks/1-7/volumes.html).
 
-VxRails used in TA4V include vSAN, which is well applied to TKGI needs on a per vSphere cluster basis, or in the stretched cluster approach (MVP2), vSAN Fault Domains. This will provide storage for the TKGI installation in each AZ but there's one additional need for storage: stateful apps. You can not look to vSAN to satisfy the storage needs for cross-cluster common storage.
+The VxRail servers used in TA4V include vSAN, which is well applied to TKGI needs on a per vSphere cluster basis, or in the stretched cluster approach (MVP2) using vSAN Fault Domains. This will provide storage for the TKGI installation in each AZ. But you may need storage for stateful applications. You can not look to vSAN to satisfy the storage needs for cross-cluster common storage.
 
 **TKGI storage options to support stateful apps include:**
 
-* NFS, iSCSI and fiber channel datastores from external sources that are common to all clusters/host groups
+* NFS
+* iSCSI connected datastores
+* Fiber Channel connected datastores
+
+In order to use external connected datastores across all clusters, each cluster must be connected separately.
 
 vSAN does not support sharing datastores across vSphere clusters. As fail-over across availability zones is desired in the multiple cluster architecture, deploying external shared storage across those vSphere clusters / availability zones such as NFS/iSCSI/FC for both static and dynamic persistent volume provisioning for stateful workloads is recommended. Please refer to [TKGI Documentation](https://docs.pivotal.io/pks/1-7/volumes.html) for the implementation details of persistent volumes.
 
-In summary: You must provide a shared storage target for TKGI to use across all clusters in use for stateful apps that can not be a cluster's vSAN, unless there is only one cluster used by TKGI, or shared storage is not drawn from vSAN, or no stateful apps are to be deployed.
+In summary: You must provide a shared storage target for TKGI to use across all clusters in use for stateful apps that can not be a cluster's vSAN, unless there is only one cluster used by TKGI, or shared storage is not drawn from vSAN, or no stateful applications can be deployed.
 
 ## <a id='tas4vms_storage'></a>Cloud Foundry Storage Considerations (TAS for VMs Storage)
 

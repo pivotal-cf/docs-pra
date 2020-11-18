@@ -6,7 +6,27 @@ owner: Customer[0]
 
 ## <a id='3.0.0'></a>3.0.0
 
-**Release Date**: tbd
+**Release Date**: January XX, 2020
 
 - Bill of materials update since VMware Tanzu™ Architecture for Dell EMC VxRail v3.0
  
+**Release Date**: July 31, 2020
+
+- Bill of materials update since VMware Tanzu™ Architecture for Dell EMC VxRail 2.4
+  - VxRail 4.7.4XX -> 4.7.510
+  - NSX-T 2.5.1 -> 2.5.1
+  - Ops Manager 2.8 -> 2.9
+  - Tanzu Application Service for VMs (Pivotal Application Service) 2.8 -> 2.9
+  - VMware NSX-T Container Plug-in for TAS 2.5.1 -> 3.0.1
+  - Tanzu Kubernetes Grid Integrated (VMware Enterprise PKS) 1.7 -> 1.8
+  - VMware Harbor Registry 1.10.1 -> 1.10.3
+- [Tanzu Application Service 2.9 Release Notes](https://docs.pivotal.io/platform/2-9/release-notes/)
+- [Tanzu Kubernetes Grid Integrated (VMware Enterprise PKS) 1.8 Release Notes](https://docs.pivotal.io/pks/1-8/release-notes.html)
+- In PKS v1.7, the default topology changed from dedicated T1 to shared T1.
+  - The diagrams update to shared T1 topology.
+  - The dedicated T1 topology persists during upgrade and is supported.
+  - There is no migration path from dedicated T1 to shared T1.
+
+    For more information, see [Shared and Dedicated Tier-1 Router Topologies]
+  (https://docs.pivotal.io/pks/1-7/network-profiles-shared-t1.html)
+  in the VMware Enterprise PKS documentation.
