@@ -36,16 +36,16 @@ This recommended architecture includes VMware vSphere and NSX-T Data Center, a s
 
 | Software Component|    Version |
 | ------------- | -------------|
-|VxRail HCI System Software|4.7.510 and newer|
-|VMware vSphere ESXi|6.7 Patch 02 GA build 16075168|
-|VMware vCenter (VCSA)|6.7 U3g GA build 16046470|
-|VMware vSAN|6.7 Patch 02|
-|VMware NSX-T Data Center|2.5.1|
-|VMware NSX-T Container Plug-in (NCP)|3.0.1|
-|Operations Manager|2.9.latest|
-|VMware Tanzu Kubernetes Grid Integrated (TKGI) |1.8.latest|
-|Tanzu Application Service (TAS) for VMs|2.9.latest|
-|VMware Harbor Registry|1.10.latest|
+|VxRail HCI System Software|7.0.100 and newer|
+|VMware vSphere ESXi|7.0 U1 GA build 16850804|
+|VMware vCenter (VCSA)|7.0 U1 GA build 16860138|
+|VMware vSAN|7.0 U1|
+|VMware NSX-T Data Center|3.0.2|
+|VMware NSX-T Container Plug-in (NCP)|3.0.2.2|
+|Operations Manager|2.10.latest|
+|VMware Tanzu Kubernetes Grid Integrated (TKGI) |1.9.latest|
+|Tanzu Application Service (TAS) for VMs|2.10.latest|
+|VMware Harbor Registry|2.1.latest|
 |Dell EMC ECS|3.3.X|
 
 To use all the features listed here, NSX-T Data Center **requires at least Advanced licensing** from VMware when used with TAS for VMs. The equivalent of that licensing is included with TKGI.
@@ -56,21 +56,20 @@ The following Bill of Materials (BOM) along with sample applications, was used t
 
 | Component| Version or Model |
 | ------------- | -------------|
-|VxRail Node Type|E560|
-|VxRail HCI System Software|4.7.510|
-|VxRail BIOS|2.6.4|
-|VxRail iDRAC Firmware|4.10.10.10|
+|VxRail Node Type|E560F|
+|VxRail HCI System Software|7.0.100|
+|VxRail BIOS|2.8.2|
+|VxRail iDRAC Firmware|4.22.00.201|
 |VxRail CPU (x2)|Intel(R) Xeon(R) Gold 5120 CPU @ 2.20GHz|
-|VxRail NIC|Intel(R) 10GbE 4P X710 rNDC 4 port|
+|VxRail NIC|Intel(R) 10GbE 4P X710 rNDC 4 port (only 2 used)|
 |VxRail RAM (x12) per|32GB (x12) DDR-4 2400Mhz|
-|Cache Tier|Toshiba PX05SMB080Y 800GB (x2)|
-|Capacity Tier|Seagate ST2000NX0423 2TB (x4)|
-|VMware NSX-T Data Center|2.5.1|
-|VMware NSX-T Container Plug-in (NCP)|3.0.1|
-|Operations Manager|2.9.5|
-|VMware Tanzu Kubernetes Grid Integrated (TKGI)|1.8.0|
-|Tanzu Application Service (TAS) for VMs|2.9.5|
-|VMware Harbor Registry|1.10.3|
+|Flash Storage (Cache/Capacity)|Toshiba KPM5XRUG1T92 1.92TB (x4), Toshiba KPM5XMUG800G 800GB (x2)|
+|VMware NSX-T Data Center|3.0.2|
+|VMware NSX-T Container Plug-in (NCP)|3.0.2.2|
+|Tanzu Operations Manager|2.10.2|
+|VMware Tanzu Kubernetes Grid Integrated (TKGI)|1.9.1|
+|Tanzu Application Service (TAS) for VMs|2.10.8|
+|VMware Harbor Registry|2.1.1|
 |Dell EMC ECS|3.3.0|
 
-<p class="note"><strong>NCP 3.0.1 and Stemcell incompatibility: </strong>Both TAS and TKGI in this release use NCP 3.0.1 and it is not compatible with bosh stemcell 621.76+ and Operations Manager 2.9.6. Please refer to the product release notes and fix before upgrading Operations Manager beyond 2.9.6</p>
+<p class="note">NSX Container Plugin 3.0.2.2 is a patch release. It resolves an OVS kernel module compilation issue on Stemcells 621.85 and above, 456.121 and above.</p>
