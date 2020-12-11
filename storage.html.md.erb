@@ -9,7 +9,7 @@ owner: Customer[0]
 
 TKGI can be used to manage multiple Kubernetes clusters distributed across multiple vSphere clusters. Each kubernetes cluster's storage requirements are determined from the applications planned but are limited by the size of the cluster. Detailed guidance on how to configure and manage storage can be found in the [TKGI Documentation](https://docs.pivotal.io/tkgi/1-9/volumes.html).
 
-The VxRail servers used in TA4V include vSAN, which is well applied to TKGI needs on a per vSphere cluster basis, or in the stretched cluster approach (MVP2) using vSAN Fault Domains. This will provide storage for the TKGI installation in each AZ. But you may need storage for stateful applications. You can not look to vSAN to satisfy the storage needs for cross-cluster common storage.
+The VxRail servers used in TA4V include vSAN, which is well suited to TKGI needs on a per vSphere cluster basis, or in the stretched cluster approach (MVP2) using vSAN Fault Domains. This will provide storage for the TKGI installation in each AZ. But you may need storage for stateful applications. You can not look to vSAN to satisfy the storage needs for cross-cluster common storage.
 
 **TKGI storage options to support stateful apps include:**
 
