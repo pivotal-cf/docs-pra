@@ -5,11 +5,16 @@ Docs for VMware Tanzu Architecture for Dell EMC VxRail, formerly known as Pivota
 
 ## Which branch to use?
 
-**Note**: Provide instructions in your PRs to indicate which branches you want Docs to apply your commits to.
+**Note**: Provide instructions in your PRs to indicate which branches you want the Docs team to apply your commits to.
 
-| Branch name | Use for… |
+DO NOT USE MASTER BRANCH.
+
+| Branch name | Use for... |
 |-------------| -------|
-| master      | "edge" branch for 2.x, publishes to https://docs-pcf-staging.cfapps.io/pra/2-n|
+| Master      | Not used except for this README |
+| v3.1.x      | v3.1.x publishes to https://docs-pcf-staging.sc2-04-pcf1-apps.oc.vmware.com/pra/3-1 |
+| v3.0.x      | v3.0.x publishes to https://docs-pcf-staging.sc2-04-pcf1-apps.oc.vmware.com/pra/3-0 |
+| v2.4.x      | v2.4.0 |
 | v2.3.x      | v2.3.0 |
 | v2.2.x      | v2.2.0 |
 | v2.1.x      | v2.1.0 |
@@ -33,16 +38,14 @@ This is a word list for terminology and word usage specific to the VMware Tanzu 
 
 ```
 cd docs-book-pra
-gem install [local_file_book_binder_10.1.15.gem]
+gem install bookbindery
 bundle install
-bundle exec bookbinder watch
 ```
 
-***Note: book binder 10.1.15 gem is internally available, not available in public ruby gem site***  
 ***Note: ruby version 2.5.5***  
 
 ## Concourse Pipeline by doc team
 
-* [Pipeline](https://concourse.run.pivotal.io/teams/cf-docs/pipelines/pra) will bind the doc and push to staging environment
-* Promotion to product is done by manual trigger
+* [Pipeline](https://runway-ci.eng.vmware.com/teams/mapbu-docs/pipelines/pra) will bind the documentation set and push to staging environment
+* Promotion to production is done by manual trigger
     
