@@ -32,9 +32,9 @@ Starter Kit Applied to TKGI
 * Overall capacity for applications is shared with the management infrastructure
 * Management and operational components are kept to a minimum to reduce waste and speed recovery after a failure event
 * Storage is purposely kept simple for stable operation during service outages, patching or unplanned outages
-* A maxiumum of a single host can be out of service at any one time in order to maintain normal operations
+* A maximum of a single host can be out of service at any one time in order to maintain normal operations
 
-Also, consider that vSphere Dynamic Resource Scheduling (DRS)) can be applied to steer VMs either apart from each other (anti-affinity) or towards each other (affinity). DRS can be used to keep redundant services (e.g. Gorouters) apart in order to facilitate survivability during an outage.
+Also, consider that vSphere Dynamic Resource Scheduling (DRS) can be applied to steer VMs either apart from each other (anti-affinity) or towards each other (affinity). DRS can be used to keep redundant services (e.g. Gorouters) apart in order to facilitate survivability during an outage.
 
 **Note about DRS rules:** When using DRS, we recommend using the "should" rule vs the "must" rule. This will allow VMs that violate the DRS rule to power on anyway as opposed to being denied power on. For example, you have three AZs and eleven Gorouters. With a DRS anti-affinity "should" rule they will deploy on each server separately and then overlap but all power on. With the "must" rule, only four will power on and the others will not, as they can not be placed on a server away from the others.
 

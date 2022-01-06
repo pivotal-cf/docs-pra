@@ -46,7 +46,7 @@ TA4V Multiple Cluster Design
 ![clusters](./images/TA4V_vSphere_3Cluster_AZs_Only.png)
 [View a larger version of this diagram](./images/TA4V_vSphere_3Cluster_AZs_Only.png).
 
-This third stage design (MVP3) is production-ready with ample high availability and redundant capacity for full-time Enterprise use. This size is appropriate for combined TKGI and TAS for VMs deployments. if required, you may use host groups (or Resource Pools with or without host groups) to organize components within the clusters capacity. There is no practical reason to scale horizontally (more clusters/AZs) from this model as the upper limits of aggregate compute & memory far exceed the capability of the software components that make it up. If true exascale capacity is desired, a better approach is to deploy three of these models in parallel as opposed to one, bigger one.
+This third stage design (MVP3) is production-ready with ample high availability and redundant capacity for full-time Enterprise use. This size is appropriate for combined TKGI and TAS for VMs deployments. if required, you may use host groups (or Resource Pools with or without host groups) to organize components within the clusters capacity. There is no practical reason to scale horizontally (more clusters/AZs) from this model as the upper limits of aggregate compute and memory far exceed the capability of the software components that make it up. If true exascale capacity is desired, a better approach is to deploy three of these models in parallel as opposed to one, bigger one.
 
 **Key items that change are:**
 
