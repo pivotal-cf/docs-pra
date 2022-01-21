@@ -7,5 +7,4 @@
 * [Growth Beyond Minimum Viable Platform](growth.html)
 * [Storage](storage.html)
 * [Routing](routing.html)
-* [Upgrade Validation](upgrade.html)
 * [Summary and Conclusions](summary.html)
