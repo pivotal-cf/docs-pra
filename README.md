@@ -12,6 +12,8 @@ DO NOT USE MASTER BRANCH.
 | Branch name | Use for... |
 |-------------| -------|
 | Master      | Not used except for this README |
+| v3.3.x      | v3.3.x publishes to https://docs-pcf-staging.sc2-04-pcf1-apps.oc.vmware.com/pra/3-3 |
+| v3.2.x      | v3.2.x publishes to https://docs-pcf-staging.sc2-04-pcf1-apps.oc.vmware.com/pra/3-2 |
 | v3.1.x      | v3.1.x publishes to https://docs-pcf-staging.sc2-04-pcf1-apps.oc.vmware.com/pra/3-1 |
 | v3.0.x      | v3.0.x publishes to https://docs-pcf-staging.sc2-04-pcf1-apps.oc.vmware.com/pra/3-0 |
 | v2.4.x      | v2.4.0 |
